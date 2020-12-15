@@ -34,7 +34,6 @@ import '../models/models.dart';
 
 // Mock recipe service that grabs sample json data to mock recipe request/response
 class MockFooderlichService {
-
   // Batch request that gets both today recipes and friend's feed
   Future<ExploreData> getExploreData() async {
     var todayRecipes = await _getTodayRecipes();
@@ -48,7 +47,8 @@ class MockFooderlichService {
     // Simulate api request wait time
     await Future.delayed(Duration(milliseconds: 1000));
     // Load json from file system
-    String dataString = await _loadAsset('assets/sample_data/sample_explore_recipes.json');
+    String dataString =
+        await _loadAsset('assets/sample_data/sample_explore_recipes.json');
     // Decode to json
     Map<String, dynamic> json = jsonDecode(dataString);
 
@@ -69,7 +69,8 @@ class MockFooderlichService {
     // Simulate api request wait time
     await Future.delayed(Duration(milliseconds: 1000));
     // Load json from file system
-    String dataString = await _loadAsset('assets/sample_data/sample_friends_feed.json');
+    String dataString =
+        await _loadAsset('assets/sample_data/sample_friends_feed.json');
     // Decode to json
     Map<String, dynamic> json = jsonDecode(dataString);
 
@@ -90,7 +91,8 @@ class MockFooderlichService {
     // Simulate api request wait time
     await Future.delayed(Duration(milliseconds: 1000));
     // Load json from file system
-    String dataString = await _loadAsset('assets/sample_data/sample_recipes.json');
+    String dataString =
+        await _loadAsset('assets/sample_data/sample_recipes.json');
     // Decode to json
     Map<String, dynamic> json = jsonDecode(dataString);
 
