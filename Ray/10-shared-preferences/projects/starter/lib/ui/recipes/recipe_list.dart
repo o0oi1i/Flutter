@@ -31,6 +31,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../widgets/custom_dropdown.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RecipeList extends StatefulWidget {
   @override
@@ -38,6 +39,8 @@ class RecipeList extends StatefulWidget {
 }
 
 class _RecipeListState extends State<RecipeList> {
+  static const String prefSearchKey = "previousSearches";
+
   TextEditingController searchTextController;
   ScrollController _scrollController = ScrollController();
   List currentSearchList = List();
@@ -48,10 +51,12 @@ class _RecipeListState extends State<RecipeList> {
   bool hasMore = false;
   bool loading = false;
   bool inErrorState = false;
+  List<String> previousSearches = List<String>();
 
   @override
   void initState() {
     super.initState();
+    getPreviousSearches();
     searchTextController = TextEditingController(text: "");
     _scrollController
       ..addListener(() {
@@ -78,6 +83,27 @@ class _RecipeListState extends State<RecipeList> {
   void dispose() {
     searchTextController.dispose();
     super.dispose();
+  }
+
+  void savePreviousSearches() async {
+    // 1
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // 2
+    prefs.setStringList(prefSearchKey, previousSearches);
+  }
+
+  void getPreviousSearches() async {
+    // 1
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // 2
+    if (prefs.containsKey(prefSearchKey)) {
+      // 3
+      previousSearches = prefs.getStringList(prefSearchKey);
+      // 4
+      if (previousSearches == null) {
+        previousSearches = List<String>();
+      }
+    }
   }
 
   @override
@@ -110,29 +136,78 @@ class _RecipeListState extends State<RecipeList> {
               width: 6.0,
             ),
             Expanded(
-              // ******** Replace ****************
+              // 3
               child: TextField(
-                decoration: InputDecoration(border: InputBorder.none, hintText: 'Search'),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search',
+                ),
                 autofocus: false,
-                controller: searchTextController,
-                onChanged: (query) => {
-                  if (query.length >= 3)
-                    {
-                      // Rebuild list
-                      setState(() {
-                        currentSearchList.clear();
-                        currentCount = 0;
-                        currentEndPosition = pageCount;
-                        currentStartPosition = 0;
-                      })
-                    }
+                // 4
+                textInputAction: TextInputAction.done,
+                // 5
+                onSubmitted: (value) {
+                  if (!previousSearches.contains(value)) {
+                    previousSearches.add(value);
+                    savePreviousSearches();
+                  }
                 },
+                controller: searchTextController,
               ),
-              // ******** Replace ****************
+            ),
+            // 6
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.arrow_drop_down),
+              // 7
+              onSelected: (String value) {
+                searchTextController.text = value;
+                startSearch(searchTextController.text);
+              },
+              itemBuilder: (BuildContext context) {
+                // 8
+                return previousSearches.map<CustomDropdownMenuItem<String>>(
+                  (String value) {
+                    return CustomDropdownMenuItem<String>(
+                      text: value,
+                      value: value,
+                      callback: () {
+                        setState(
+                          () {
+                            // 9
+                            previousSearches.remove(value);
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
+                    );
+                  },
+                ).toList();
+              },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void startSearch(String value) {
+    // 1
+    setState(
+      () {
+        // 2
+        currentSearchList.clear();
+        currentCount = 0;
+        currentEndPosition = pageCount;
+        currentStartPosition = 0;
+        hasMore = true;
+        // 3
+        if (!previousSearches.contains(value)) {
+          // 4
+          previousSearches.add(value);
+          // 5
+          savePreviousSearches();
+        }
+      },
     );
   }
 

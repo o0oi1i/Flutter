@@ -34,15 +34,17 @@ import 'myrecipes/my_recipes_list.dart';
 import 'recipes/recipe_list.dart';
 import 'shopping/shopping_list.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen>  {
+class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   List<Widget> pageList = List<Widget>();
+  static const String prefSelectedIndexKey = "selectedIndex";
 
   @override
   void initState() {
@@ -50,18 +52,41 @@ class _MainScreenState extends State<MainScreen>  {
     pageList.add(RecipeList());
     pageList.add(MyRecipesList());
     pageList.add(ShoppingList());
+    getCurrentIndex();
+  }
+
+  void saveCurrentIndex() async {
+    // 1
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // 2
+    prefs.setInt(prefSelectedIndexKey, _selectedIndex);
+  }
+
+  void getCurrentIndex() async {
+    // 1
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // 2
+    if (prefs.containsKey(prefSelectedIndexKey)) {
+      // 3
+      setState(() {
+        _selectedIndex = prefs.getInt(prefSelectedIndexKey);
+      });
+    }
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(
+      () {
+        _selectedIndex = index;
+      },
+    );
+    saveCurrentIndex();
   }
 
   @override
   Widget build(BuildContext context) {
     String title;
-    switch(_selectedIndex) {
+    switch (_selectedIndex) {
       case 0:
         title = 'Recipes';
         break;
@@ -77,29 +102,20 @@ class _MainScreenState extends State<MainScreen>  {
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                  'assets/images/icon_recipe.svg',
-                  color: _selectedIndex == 0 ? green : Colors.grey ,
-                  semanticsLabel: 'Recipes'
-              ),
-              title: Text("Recipes")
-            ),
+                icon: SvgPicture.asset('assets/images/icon_recipe.svg',
+                    color: _selectedIndex == 0 ? green : Colors.grey,
+                    semanticsLabel: 'Recipes'),
+                title: Text("Recipes")),
             BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                    'assets/images/icon_bookmarks.svg',
-                    color: _selectedIndex == 1 ? green : Colors.grey ,
-                    semanticsLabel: 'Bookmarks'
-                ),
-              title: Text("Bookmarks")
-            ),
+                icon: SvgPicture.asset('assets/images/icon_bookmarks.svg',
+                    color: _selectedIndex == 1 ? green : Colors.grey,
+                    semanticsLabel: 'Bookmarks'),
+                title: Text("Bookmarks")),
             BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                    'assets/images/icon_shopping_list.svg',
-                    color: _selectedIndex == 2 ? green : Colors.grey ,
-                    semanticsLabel: 'Groceries'
-                ),
-              title: Text("Groceries")
-            ),
+                icon: SvgPicture.asset('assets/images/icon_shopping_list.svg',
+                    color: _selectedIndex == 2 ? green : Colors.grey,
+                    semanticsLabel: 'Groceries'),
+                title: Text("Groceries")),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: green,
@@ -108,7 +124,11 @@ class _MainScreenState extends State<MainScreen>  {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          title: Text(title, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),),
+          title: Text(
+            title,
+            style: TextStyle(
+                fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),
+          ),
         ),
         body: IndexedStack(
           index: _selectedIndex,
@@ -117,5 +137,4 @@ class _MainScreenState extends State<MainScreen>  {
       ),
     );
   }
-
 }
