@@ -34,6 +34,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../colors.dart';
 import '../widgets/custom_dropdown.dart';
 
+import 'dart:convert';
+import '../../network/recipe_model.dart';
+import 'package:flutter/services.dart';
+import '../recipe_card.dart';
+
 class RecipeList extends StatefulWidget {
   @override
   _RecipeListState createState() => _RecipeListState();
@@ -53,31 +58,46 @@ class _RecipeListState extends State<RecipeList> {
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = List<String>();
+  APIRecipeQuery _currentRecipes1;
 
   @override
   void initState() {
     super.initState();
+    loadRecipes();
     getPreviousSearches();
     searchTextController = TextEditingController(text: "");
     _scrollController
-      ..addListener(() {
-        var triggerFetchMoreSize =
-            0.7 * _scrollController.position.maxScrollExtent;
+      ..addListener(
+        () {
+          var triggerFetchMoreSize =
+              0.7 * _scrollController.position.maxScrollExtent;
 
-        if (_scrollController.position.pixels > triggerFetchMoreSize) {
-          if (hasMore &&
-              currentEndPosition < currentCount &&
-              !loading &&
-              !inErrorState) {
-            setState(() {
-              loading = true;
-              currentStartPosition = currentEndPosition;
-              currentEndPosition =
-                  min(currentStartPosition + pageCount, currentCount);
-            });
+          if (_scrollController.position.pixels > triggerFetchMoreSize) {
+            if (hasMore &&
+                currentEndPosition < currentCount &&
+                !loading &&
+                !inErrorState) {
+              setState(() {
+                loading = true;
+                currentStartPosition = currentEndPosition;
+                currentEndPosition =
+                    min(currentStartPosition + pageCount, currentCount);
+              });
+            }
           }
-        }
-      });
+        },
+      );
+  }
+
+  Future loadRecipes() async {
+    // 1
+    var jsonString = await rootBundle.loadString('assets/recipes1.json');
+    setState(
+      () {
+        // 2
+        _currentRecipes1 = APIRecipeQuery.fromJson(jsonDecode(jsonString));
+      },
+    );
   }
 
   @override
@@ -85,7 +105,7 @@ class _RecipeListState extends State<RecipeList> {
     searchTextController.dispose();
     super.dispose();
   }
-  
+
   void savePreviousSearches() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(prefSearchKey, previousSearches);
@@ -127,7 +147,9 @@ class _RecipeListState extends State<RecipeList> {
         child: Row(
           children: [
             IconButton(
-              icon: Icon(Icons.search,),
+              icon: Icon(
+                Icons.search,
+              ),
               onPressed: () {
                 startSearch(searchTextController.text);
               },
@@ -199,12 +221,24 @@ class _RecipeListState extends State<RecipeList> {
   }
 
   Widget _buildRecipeLoader(BuildContext context) {
-    if (searchTextController.text.length < 3) {
+    // 1
+    if (_currentRecipes1 == null || _currentRecipes1.hits == null) {
       return Container();
     }
     // Show a loading indicator while waiting for the movies
     return Center(
-      child: CircularProgressIndicator(),
+      // 2
+      child: _buildRecipeCard(context, _currentRecipes1.hits, 0),
+    );
+  }
+
+  Widget _buildRecipeCard(BuildContext context, List<APIHits> hits, int index) {
+    // 1
+    APIRecipe recipe = hits[index].recipe;
+    return GestureDetector(
+      onTap: () {},
+      // 2
+      child: recipeStringCard(recipe.image, recipe.label),
     );
   }
 }
