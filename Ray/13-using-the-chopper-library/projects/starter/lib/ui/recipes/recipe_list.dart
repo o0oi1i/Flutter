@@ -27,7 +27,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -39,6 +38,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../colors.dart';
 import '../recipe_card.dart';
 import 'recipe_details.dart';
+import 'package:chopper/chopper.dart';
+import '../../network/model_response.dart';
 
 class RecipeList extends StatefulWidget {
   @override
@@ -64,7 +65,7 @@ class _RecipeListState extends State<RecipeList> {
   void initState() {
     super.initState();
     getPreviousSearches();
- 
+
     searchTextController = TextEditingController(text: "");
     _scrollController
       ..addListener(() {
@@ -87,18 +88,12 @@ class _RecipeListState extends State<RecipeList> {
       });
   }
 
-  Future<APIRecipeQuery> getRecipeData(String query, int from, int to) async {
-    var recipeJson = await RecipeService().getRecipes(query, from, to);
-    var recipeMap = json.decode(recipeJson);
-    return APIRecipeQuery.fromJson(recipeMap);;
-  }
-
   @override
   void dispose() {
     searchTextController.dispose();
     super.dispose();
   }
-  
+
   void savePreviousSearches() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(prefSearchKey, previousSearches);
@@ -200,7 +195,7 @@ class _RecipeListState extends State<RecipeList> {
     );
   }
 
-   void startSearch(String value) {
+  void startSearch(String value) {
     setState(() {
       currentSearchList.clear();
       currentCount = 0;
@@ -215,14 +210,16 @@ class _RecipeListState extends State<RecipeList> {
     });
   }
 
- Widget _buildRecipeLoader(BuildContext context) {
+  Widget _buildRecipeLoader(BuildContext context) {
     if (searchTextController.text.length < 3) {
       return Container();
     }
-    // TODO: change with new response
-    return FutureBuilder<APIRecipeQuery>(
-      // TODO: change with new RecipeService
-      future: getRecipeData(searchTextController.text.trim(), currentStartPosition, currentEndPosition),
+    return FutureBuilder<Response<Result<APIRecipeQuery>>>(
+      future: RecipeService.create().queryRecipes(
+        searchTextController.text.trim(),
+        currentStartPosition,
+        currentEndPosition,
+      ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
@@ -236,8 +233,16 @@ class _RecipeListState extends State<RecipeList> {
           }
 
           loading = false;
-          // TODO: change with new snapshot
-          final query = snapshot.data;
+          // 1
+          final result = snapshot.data.body;
+// 2
+          if (result is Error) {
+            // Hit an error
+            inErrorState = true;
+            return _buildRecipeList(context, currentSearchList);
+          }
+// 3
+          final query = (result as Success).value;
           inErrorState = false;
           currentCount = query.count;
           hasMore = query.more;
