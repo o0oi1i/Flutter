@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'fooderlich_theme.dart';
 
 class Card3 extends StatelessWidget {
   const Card3({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -22,34 +24,22 @@ class Card3 extends StatelessWidget {
               ),
             ),
             Container(
-              // 3
               padding: const EdgeInsets.all(16),
-              // 4
               child: Column(
-                // 5
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 6
                   const Icon(Icons.book, color: Colors.white, size: 40),
-                  // 7
                   const SizedBox(height: 8),
-                  // 8
                   Text('Recipe Trends',
                       style: FooderlichTheme.darkTextTheme.headline2),
-                  // 9
                   const SizedBox(height: 30),
                 ],
               ),
             ),
-            // 10
             Center(
-              // 11
               child: Wrap(
-                // 12
                 alignment: WrapAlignment.start,
-                // 13
-                spacing: 12,
-                // 14
+                spacing: 10,
                 children: [
                   Chip(
                     label: Text('Healthy',
@@ -73,7 +63,7 @@ class Card3 extends StatelessWidget {
                     backgroundColor: Colors.black.withOpacity(0.7),
                   ),
                   Chip(
-                    label: Text('Healthy Healthy',
+                    label: Text('FooderlichTheme12',
                         style: FooderlichTheme.darkTextTheme.bodyText1),
                     backgroundColor: Colors.black.withOpacity(0.7),
                     onDeleted: () {
@@ -81,7 +71,7 @@ class Card3 extends StatelessWidget {
                     },
                   ),
                   Chip(
-                    label: Text(' Vegan',
+                    label: Text(' backgroundColor',
                         style: FooderlichTheme.darkTextTheme.bodyText1),
                     backgroundColor: Colors.black.withOpacity(0.7),
                     onDeleted: () {
@@ -89,7 +79,7 @@ class Card3 extends StatelessWidget {
                     },
                   ),
                   Chip(
-                    label: Text('Carrots Carrots',
+                    label: Text('withOpacity',
                         style: FooderlichTheme.darkTextTheme.bodyText1),
                     backgroundColor: Colors.black.withOpacity(0.7),
                   ),

@@ -2,74 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FooderlichTheme {
-
-  // 1
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.black),
+        fontSize: 14.0, fontWeight: FontWeight.w700, color: Colors.black),
     headline1: GoogleFonts.openSans(
-      fontSize: 32.0,
-      fontWeight: FontWeight.bold,
-      color: Colors.black),
+        fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.black),
     headline2: GoogleFonts.openSans(
-      fontSize: 21.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.black),
+        fontSize: 21.0, fontWeight: FontWeight.w700, color: Colors.black),
     headline3: GoogleFonts.openSans(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.black),
+        fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.black),
     headline6: GoogleFonts.openSans(
-      fontSize: 20.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.black),
+        fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black),
   );
 
-  // 2
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.white),
+        fontSize: 14.0, fontWeight: FontWeight.w600, color: Colors.white),
     headline1: GoogleFonts.openSans(
-      fontSize: 32.0,
-      fontWeight: FontWeight.bold,
-      color: Colors.white),
+        fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.white),
     headline2: GoogleFonts.openSans(
-      fontSize: 21.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.white),
+        fontSize: 21.0, fontWeight: FontWeight.w700, color: Colors.white),
     headline3: GoogleFonts.openSans(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.white),
+        fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.white),
     headline6: GoogleFonts.openSans(
-      fontSize: 20.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.white),
+        fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.white),
   );
 
-  // 3
   static ThemeData light() {
     return ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.white,
-        accentColor: Colors.black,
-        textSelectionTheme:
-          const TextSelectionThemeData(selectionColor: Colors.green),
-        textTheme: lightTextTheme,
+      brightness: Brightness.light,
+      primaryColor: Colors.white,
+      accentColor: Colors.black,
+      textSelectionTheme:
+          const TextSelectionThemeData(selectionColor: Colors.orange),
+      textTheme: lightTextTheme,
     );
   }
 
-  // 4
   static ThemeData dark() {
     return ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.grey[900],
-        accentColor: Colors.green[600],
-        textTheme: darkTextTheme,
+      brightness: Brightness.dark,
+      primaryColor: Colors.grey[900],
+      accentColor: Colors.orange[600],
+      textTheme: darkTextTheme,
     );
   }
 }

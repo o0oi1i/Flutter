@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'fooderlich_theme.dart';
+
 import 'circle_image.dart';
 
 class AuthorCard extends StatelessWidget {
-  // 1
   final String authorName;
   final String title;
   final ImageProvider imageProvider;
@@ -15,7 +16,6 @@ class AuthorCard extends StatelessWidget {
     this.imageProvider,
   }) : super(key: key);
 
-  // 2
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,12 +23,9 @@ class AuthorCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // 1
           Row(children: [
             CircleImage(imageProvider: imageProvider, imageRadius: 28),
-            // 2
             const SizedBox(width: 8),
-            // 3
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -44,12 +41,9 @@ class AuthorCard extends StatelessWidget {
             ),
           ]),
           IconButton(
-            // 4
             icon: const Icon(Icons.favorite_border),
             iconSize: 30,
             color: Colors.grey[400],
-
-            // 5
             onPressed: () {
               const snackBar = SnackBar(content: Text('Press Favorite'));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
