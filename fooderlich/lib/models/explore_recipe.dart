@@ -92,17 +92,16 @@ class ExploreRecipe {
     description = json['description'];
     source = json['source'];
     if (json['ingredients'] != null) {
-      ingredients = new List<Ingredients>();
+      ingredients = <Ingredients>[];
       json['ingredients'].forEach((v) {
         ingredients.add(new Ingredients.fromJson(v));
       });
     }
     if (json['instructions'] != null) {
-      instructions = new List<Instruction>();
+      instructions = <Instruction>[];
       json['instructions'].forEach((v) {
         instructions.add(new Instruction.fromJson(v));
       });
     }
   }
 }
-

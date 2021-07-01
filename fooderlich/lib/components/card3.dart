@@ -37,12 +37,11 @@ class Card3 extends StatelessWidget {
 
   const Card3({Key key, this.recipe}) : super(key: key);
 
-    List<Widget> createTagChips() {
-    var chips = List<Widget>();
+  List<Widget> createTagChips() {
+    var chips = <Widget>[];
     recipe.tags.take(6).forEach((element) {
       var chip = Chip(
-          label: Text(element,
-              style: FooderlichTheme.darkTextTheme.bodyText1),
+          label: Text(element, style: FooderlichTheme.darkTextTheme.bodyText1),
           backgroundColor: Colors.black.withOpacity(0.7));
       chips.add(chip);
     });
@@ -83,10 +82,9 @@ class Card3 extends StatelessWidget {
             ),
             Center(
               child: Wrap(
-                alignment: WrapAlignment.start,
-                spacing: 12,
-                children: createTagChips()
-              ),
+                  alignment: WrapAlignment.start,
+                  spacing: 12,
+                  children: createTagChips()),
             ),
           ],
         ),

@@ -23,7 +23,7 @@ class GroceryListScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = groceryItems[index];
           // 1
-          Dismissible(
+          return Dismissible(
             // 6
             key: Key(item.id),
             // 7
