@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-import 'models.dart';
+import '../models.dart';
 
 class ExploreData {
   final List<ExploreRecipe> todayRecipes;
