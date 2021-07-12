@@ -7,3 +7,4 @@ export 'grocery_manager.dart';
 export 'user.dart';
 export 'fooderlich_pages.dart';
 export 'profile_manager.dart';
+export 'app_state_manager.dart';
