@@ -30,7 +30,6 @@ class ExploreScreen extends StatelessWidget {
               // 8
               const SizedBox(height: 10),
               // 9
-              // TODO: Replace this with FriendPostListView
               FriendPostListView(friendPosts: snapshot.data?.friendPosts ?? []),
             ],
           );

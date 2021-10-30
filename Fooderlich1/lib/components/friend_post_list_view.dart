@@ -30,7 +30,6 @@ class FriendPostListView extends StatelessWidget {
               style: Theme.of(context).textTheme.headline2),
           // 5
           const SizedBox(height: 10),
-          // TODO: Add PostListView here
           // 1
           ListView.separated(
             // 2

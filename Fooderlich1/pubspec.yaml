@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: 
+  provider:
+  flutter_colorpicker: 
+  intl: 
+  uuid:
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +28,4 @@ flutter:
     - assets/magazine_pics/
     - assets/sample_data/
     - assets/profile_pics/
+    - assets/fooderlich_assets/

@@ -34,7 +34,6 @@ class TodayRecipeListView extends StatelessWidget {
           // 7
           Container(
             height: 400,
-            // TODO: Add ListView Here
             // 1
             color: Colors.transparent,
 // 2
@@ -61,7 +60,6 @@ class TodayRecipeListView extends StatelessWidget {
     );
   }
 
-  // TODO: Add buildCard() widget here
   Widget buildCard(ExploreRecipe recipe) {
     if (recipe.cardType == RecipeCardType.card1) {
       return Card1(recipe: recipe);
