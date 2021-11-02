@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/models.dart';
 
-class EmptyGroceryScreen extends StatelessWidget {
-  const EmptyGroceryScreen({Key key}) : super(key: key);
+import '../../models/models.dart';
+
+class GroceryEmptyScreen extends StatelessWidget {
+  const GroceryEmptyScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // 1
     return Padding(
       padding: const EdgeInsets.all(30.0),
-      // 2
       child: Center(
-        // 3
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 1
             Flexible(
-              // 2
               child: AspectRatio(
                 aspectRatio: 1 / 1,
                 child: Image.asset('assets/fooderlich_assets/empty_list.png'),

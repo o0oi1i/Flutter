@@ -1,5 +1,5 @@
-part 'ingredient.dart';
-part 'instruction.dart';
+part '../ingredient.dart';
+part '../instruction.dart';
 
 class RecipeCardType {
   static const String card1 = 'card1';
@@ -26,24 +26,25 @@ class ExploreRecipe {
   List<Ingredients> ingredients;
   List<Instruction> instructions;
 
-  ExploreRecipe(
-      {this.cardType,
-      this.title,
-      this.subtitle,
-      this.backgroundImage,
-      this.backgroundImageSource,
-      this.message,
-      this.authorName,
-      this.role,
-      this.profileImage,
-      this.durationInMinutes,
-      this.dietType,
-      this.calories,
-      this.tags,
-      this.description,
-      this.source,
-      this.ingredients,
-      this.instructions});
+  ExploreRecipe({
+    this.cardType,
+    this.title,
+    this.subtitle,
+    this.backgroundImage,
+    this.backgroundImageSource,
+    this.message,
+    this.authorName,
+    this.role,
+    this.profileImage,
+    this.durationInMinutes,
+    this.dietType,
+    this.calories,
+    this.tags,
+    this.description,
+    this.source,
+    this.ingredients,
+    this.instructions,
+  });
 
   ExploreRecipe.fromJson(Map<String, dynamic> json) {
     cardType = json['cardType'];

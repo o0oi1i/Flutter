@@ -1,4 +1,4 @@
-part of 'explore_recipe.dart';
+part of 'explore/explore_recipe.dart';
 
 class Instruction {
   String imageUrl;

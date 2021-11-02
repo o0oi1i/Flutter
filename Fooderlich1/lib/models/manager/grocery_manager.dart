@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'grocery_item.dart';
+import '../grocery/grocery_item.dart';
 
 class GroceryManager extends ChangeNotifier {
   // 1
