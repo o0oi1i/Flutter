@@ -45,16 +45,19 @@ class AppRouter extends RouterDelegate<AppLink>
         ] else ...[
           Home.page(appStateManager.getSelectedTab),
           if (groceryManager.isCreatingNewItem)
-            GroceryItemScreen.page(onCreate: (item) {
-              groceryManager.addItem(item);
-            }),
+            GroceryItemScreen.page(
+              onCreate: (item) {
+                groceryManager.addItem(item);
+              },
+            ),
           if (groceryManager.selectedIndex != null)
             GroceryItemScreen.page(
-                item: groceryManager.selectedGroceryItem,
-                index: groceryManager.selectedIndex,
-                onUpdate: (item, index) {
-                  groceryManager.updateItem(item, index);
-                }),
+              item: groceryManager.selectedGroceryItem,
+              index: groceryManager.selectedIndex,
+              onUpdate: (item, index) {
+                groceryManager.updateItem(item, index);
+              },
+            ),
           if (profileManager.didSelectUser)
             ProfileScreen.page(profileManager.getUser),
           if (profileManager.didTapOnRaywenderlich) WebViewScreen.page(),
@@ -107,8 +110,9 @@ class AppRouter extends RouterDelegate<AppLink>
       // 6
     } else {
       return AppLink(
-          location: AppLink.kHomePath,
-          currentTab: appStateManager.getSelectedTab);
+        location: AppLink.kHomePath,
+        currentTab: appStateManager.getSelectedTab,
+      );
     }
   }
 
@@ -143,7 +147,7 @@ class AppRouter extends RouterDelegate<AppLink>
         appStateManager.goToTab(newLink.currentTab ?? 0);
         // 10
         profileManager.tapOnProfile(false);
-        groceryManager.groceryItemTapped(-1);
+        groceryManager.groceryItemTapped(null);
         break;
       // 11
       default:

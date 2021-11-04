@@ -44,7 +44,7 @@
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
             <data
-              android:scheme="fooderlich"
+              android:scheme="Fooderlich"
               android:host="raywenderlich.com" />
             </intent-filter>
         </activity>
