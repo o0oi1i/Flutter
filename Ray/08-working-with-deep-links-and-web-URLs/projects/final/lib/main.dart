@@ -44,26 +44,24 @@ class _FooderlichState extends State<Fooderlich> {
             create: (context) => _profileManager,
           )
         ],
-        child: Consumer<ProfileManager>(
-          builder: (context, profileManager, child) {
-            ThemeData theme;
-            if (profileManager.darkMode) {
-              theme = FooderlichTheme.dark();
-            } else {
-              theme = FooderlichTheme.light();
-            }
-
-            return MaterialApp.router(
-              theme: theme,
-              title: 'Fooderlich',
-              backButtonDispatcher: RootBackButtonDispatcher(),
-              // 1
-              routeInformationParser: routeParser,
-              // 2
-              routerDelegate: _appRouter,
-            );
+        child:
+            Consumer<ProfileManager>(builder: (context, profileManager, child) {
+          ThemeData theme;
+          if (profileManager.darkMode) {
+            theme = FooderlichTheme.dark();
+          } else {
+            theme = FooderlichTheme.light();
           }
-        )
-      );
+
+          return MaterialApp.router(
+            theme: theme,
+            title: 'Fooderlich',
+            backButtonDispatcher: RootBackButtonDispatcher(),
+            // 1
+            routeInformationParser: routeParser,
+            // 2
+            routerDelegate: _appRouter,
+          );
+        }));
   }
 }
