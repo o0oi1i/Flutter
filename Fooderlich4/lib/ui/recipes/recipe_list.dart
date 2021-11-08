@@ -5,6 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../colors.dart';
 import '../widgets/custom_dropdown.dart';
 
+import 'dart:convert';
+import '../../network/recipe_model.dart';
+import 'package:flutter/services.dart';
+import '../recipe_card.dart';
+import 'recipe_details.dart';
+
 class RecipeList extends StatefulWidget {
   const RecipeList({Key key}) : super(key: key);
   @override
@@ -25,10 +31,12 @@ class _RecipeListState extends State<RecipeList> {
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = <String>[];
+  APIRecipeQuery _currentRecipes1 = null;
 
   @override
   void initState() {
     super.initState();
+    loadRecipes();
     getPreviousSearches();
     searchTextController = TextEditingController(text: '');
     _scrollController
@@ -50,6 +58,15 @@ class _RecipeListState extends State<RecipeList> {
           }
         }
       });
+  }
+
+  Future loadRecipes() async {
+    // 1
+    final jsonString = await rootBundle.loadString('assets/recipes1.json');
+    setState(() {
+      // 2
+      _currentRecipes1 = APIRecipeQuery.fromJson(jsonDecode(jsonString));
+    });
   }
 
   @override
@@ -180,12 +197,29 @@ class _RecipeListState extends State<RecipeList> {
   }
 
   Widget _buildRecipeLoader(BuildContext context) {
-    if (searchTextController.text.length < 3) {
+    if (_currentRecipes1 == null || _currentRecipes1.hits == null) {
       return Container();
     }
     // Show a loading indicator while waiting for the movies
-    return const Center(
-      child: CircularProgressIndicator(),
+    return Center(
+      child: _buildRecipeCard(context, _currentRecipes1.hits, 0),
+    );
+  }
+
+  Widget _buildRecipeCard(
+      BuildContext topLevelContext, List<APIHits> hits, int index) {
+    // 1
+    final recipe = hits[index].recipe;
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(topLevelContext, MaterialPageRoute(
+          builder: (context) {
+            return const RecipeDetails();
+          },
+        ));
+      },
+      // 2
+      child: recipeStringCard(recipe.image, recipe.label),
     );
   }
 }
