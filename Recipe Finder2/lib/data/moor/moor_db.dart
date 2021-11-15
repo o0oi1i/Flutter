@@ -6,27 +6,18 @@ part 'moor_db.g.dart';
 
 class MoorRecipe extends Table {
   IntColumn get id => integer().autoIncrement()();
-
   TextColumn get label => text()();
-
   TextColumn get image => text()();
-
   TextColumn get url => text()();
-
   RealColumn get calories => real()();
-
   RealColumn get totalWeight => real()();
-
   RealColumn get totalTime => real()();
 }
 
 class MoorIngredient extends Table {
   IntColumn get id => integer().autoIncrement()();
-
   IntColumn get recipeId => integer()();
-
   TextColumn get name => text()();
-
   RealColumn get weight => real()();
 }
 
@@ -46,33 +37,23 @@ class RecipeDao extends DatabaseAccessor<RecipeDatabase> with _$RecipeDaoMixin {
 
   RecipeDao(this.db) : super(db);
 
-  Future<List<MoorRecipeData>> findAllRecipes() => select(moorRecipe).get();
-
   Stream<List<Recipe>> watchAllRecipes() {
-    // 1
-    return select(moorRecipe)
-        // 2
-        .watch()
-        // 3
-        .map(
+    return select(moorRecipe).watch().map(
       (rows) {
         final recipes = <Recipe>[];
-        // 4
-        rows.forEach(
-          (row) {
-            // 5
-            final recipe = moorRecipeToRecipe(row);
-            // 6
-            if (!recipes.contains(recipe)) {
-              recipe.ingredients = <Ingredient>[];
-              recipes.add(recipe);
-            }
-          },
-        );
+        rows.forEach((row) {
+          final recipe = moorRecipeToRecipe(row);
+          if (!recipes.contains(recipe)) {
+            recipe.ingredients = <Ingredient>[];
+            recipes.add(recipe);
+          }
+        });
         return recipes;
       },
     );
   }
+
+  Future<List<MoorRecipeData>> findAllRecipes() => select(moorRecipe).get();
 
   Future<List<MoorRecipeData>> findRecipeById(int id) =>
       (select(moorRecipe)..where((tbl) => tbl.id.equals(id))).get();
@@ -91,11 +72,11 @@ class IngredientDao extends DatabaseAccessor<RecipeDatabase>
 
   IngredientDao(this.db) : super(db);
 
-  Future<List<MoorIngredientData>> findAllIngredients() =>
-      select(moorIngredient).get();
-
   Stream<List<MoorIngredientData>> watchAllIngredients() =>
       select(moorIngredient).watch();
+
+  Future<List<MoorIngredientData>> findAllIngredients() =>
+      select(moorIngredient).get();
 
   Future<List<MoorIngredientData>> findRecipeIngredients(int id) =>
       (select(moorIngredient)..where((tbl) => tbl.recipeId.equals(id))).get();
@@ -109,37 +90,41 @@ class IngredientDao extends DatabaseAccessor<RecipeDatabase>
 
 Recipe moorRecipeToRecipe(MoorRecipeData recipe) {
   return Recipe(
-      id: recipe.id,
-      label: recipe.label,
-      image: recipe.image,
-      url: recipe.url,
-      calories: recipe.calories,
-      totalWeight: recipe.totalWeight,
-      totalTime: recipe.totalTime);
-}
-
-Insertable<MoorRecipeData> recipeToInsertableMoorRecipe(Recipe recipe) {
-  return MoorRecipeCompanion.insert(
-      label: recipe.label ?? '',
-      image: recipe.image ?? '',
-      url: recipe.url ?? '',
-      calories: recipe.calories ?? 0,
-      totalWeight: recipe.totalWeight ?? 0,
-      totalTime: recipe.totalTime ?? 0);
+    id: recipe.id,
+    label: recipe.label,
+    image: recipe.image,
+    url: recipe.url,
+    calories: recipe.calories,
+    totalWeight: recipe.totalWeight,
+    totalTime: recipe.totalTime,
+  );
 }
 
 Ingredient moorIngredientToIngredient(MoorIngredientData ingredient) {
   return Ingredient(
-      id: ingredient.id,
-      recipeId: ingredient.recipeId,
-      name: ingredient.name,
-      weight: ingredient.weight);
+    id: ingredient.id,
+    recipeId: ingredient.recipeId,
+    name: ingredient.name,
+    weight: ingredient.weight,
+  );
+}
+
+Insertable<MoorRecipeData> recipeToInsertableMoorRecipe(Recipe recipe) {
+  return MoorRecipeCompanion.insert(
+    label: recipe.label ?? '',
+    image: recipe.image ?? '',
+    url: recipe.url ?? '',
+    calories: recipe.calories ?? 0,
+    totalWeight: recipe.totalWeight ?? 0,
+    totalTime: recipe.totalTime ?? 0,
+  );
 }
 
 MoorIngredientCompanion ingredientToInsertableMoorIngredient(
     Ingredient ingredient) {
   return MoorIngredientCompanion.insert(
-      recipeId: ingredient.recipeId ?? 0,
-      name: ingredient.name ?? '',
-      weight: ingredient.weight ?? 0);
+    recipeId: ingredient.recipeId ?? 0,
+    name: ingredient.name ?? '',
+    weight: ingredient.weight ?? 0,
+  );
 }

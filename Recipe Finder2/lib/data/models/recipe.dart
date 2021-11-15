@@ -1,19 +1,19 @@
 import 'package:equatable/equatable.dart';
+
 import 'ingredient.dart';
 
 class Recipe extends Equatable {
-  // 1
   int id;
+  List<Ingredient> ingredients;
+
+  final String url;
   final String label;
   final String image;
-  final String url;
-  // 2
-  List<Ingredient> ingredients;
-  final double calories;
-  final double totalWeight;
-  final double totalTime;
 
-  // 3
+  final double calories;
+  final double totalTime;
+  final double totalWeight;
+
   Recipe({
     this.id,
     this.label,
@@ -24,12 +24,10 @@ class Recipe extends Equatable {
     this.totalTime,
   });
 
-  // 4
   @override
   List<Object> get props =>
       [label, image, url, calories, totalWeight, totalTime];
 
-  // Create a Recipe from JSON data
   factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
         id: json['recipeId'],
         label: json['label'],
@@ -40,8 +38,6 @@ class Recipe extends Equatable {
         totalTime: json['totalTime'],
       );
 
-// Convert our Recipe to JSON to make it easier when you store
-// it in the database
   Map<String, dynamic> toJson() => {
         'recipeId': id,
         'label': label,

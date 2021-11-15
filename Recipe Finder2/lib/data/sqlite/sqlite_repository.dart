@@ -1,18 +1,13 @@
 import 'dart:async';
 
-import 'database_helper.dart';
+import '../models/models.dart';
 
 import '../repository.dart';
 
-import '../models/models.dart';
+import 'database_helper.dart';
 
 class SqliteRepository extends Repository {
   final dbHelper = DatabaseHelper.instance;
-
-  @override
-  Future<List<Recipe>> findAllRecipes() {
-    return dbHelper.findAllRecipes();
-  }
 
   @override
   Stream<List<Recipe>> watchAllRecipes() {
@@ -22,6 +17,11 @@ class SqliteRepository extends Repository {
   @override
   Stream<List<Ingredient>> watchAllIngredients() {
     return dbHelper.watchAllIngredients();
+  }
+
+  @override
+  Future<List<Recipe>> findAllRecipes() {
+    return dbHelper.findAllRecipes();
   }
 
   @override
@@ -100,14 +100,12 @@ class SqliteRepository extends Repository {
 
   @override
   Future init() async {
-    // 1
     await dbHelper.database;
     return Future.value();
   }
 
   @override
   void close() {
-    // 2
     dbHelper.close();
   }
 }

@@ -1,21 +1,20 @@
 import 'dart:core';
 import 'dart:async';
 
-import 'models/models.dart';
+import '../models/models.dart';
 
-import 'repository.dart';
+import '../repository.dart';
 
 class MemoryRepository extends Repository {
-  final List<Recipe> _currentRecipes = <Recipe>[];
-  final List<Ingredient> _currentIngredients = <Ingredient>[];
-
   Stream<List<Recipe>> _recipeStream;
   Stream<List<Ingredient>> _ingredientStream;
-
   final StreamController _recipeStreamController =
       StreamController<List<Recipe>>();
   final StreamController _ingredientStreamController =
       StreamController<List<Ingredient>>();
+
+  final List<Recipe> _currentRecipes = <Recipe>[];
+  final List<Ingredient> _currentIngredients = <Ingredient>[];
 
   @override
   Stream<List<Recipe>> watchAllRecipes() {
@@ -54,6 +53,7 @@ class MemoryRepository extends Repository {
   Future<List<Ingredient>> findRecipeIngredients(int recipeId) {
     final recipe =
         _currentRecipes.firstWhere((recipe) => recipe.id == recipeId);
+
     final recipeIngredients = _currentIngredients
         .where((ingredient) => ingredient.recipeId == recipe.id)
         .toList();
