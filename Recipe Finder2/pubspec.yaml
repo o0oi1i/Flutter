@@ -26,6 +26,7 @@ dependencies:
   path_provider: 
   synchronized: 
   sqlbrite: 
+  moor_flutter: 
 
 
 
@@ -36,6 +37,7 @@ dev_dependencies:
   build_runner: ^1.10.0
   json_serializable: ^3.5.1
   chopper_generator: 
+  moor_generator: 
 
 flutter:
 

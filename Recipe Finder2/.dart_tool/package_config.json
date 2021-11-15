@@ -3,21 +3,27 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/_fe_analyzer_shared-14.0.0",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/_fe_analyzer_shared-12.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.2"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/analyzer-0.41.2",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/analyzer-0.40.7",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     },
     {
-      "name": "args",
-      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/args-2.0.0",
+      "name": "analyzer_plugin_fork",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/analyzer_plugin_fork-0.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.6"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/args-1.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
     },
     {
       "name": "async",
@@ -159,7 +165,7 @@
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/dart_style-1.3.12",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/dart_style-1.3.10",
       "packageUri": "lib/",
       "languageVersion": "2.9"
     },
@@ -308,6 +314,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "moor",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/moor-3.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
+      "name": "moor_flutter",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/moor_flutter-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "moor_generator",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/moor_generator-3.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "nested",
       "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/nested-1.0.0",
       "packageUri": "lib/",
@@ -440,6 +464,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "recase",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/recase-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/rxdart-0.24.1",
       "packageUri": "lib/",
@@ -483,7 +513,7 @@
     },
     {
       "name": "source_gen",
-      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/source_gen-0.9.10+3",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/source_gen-0.9.10+2",
       "packageUri": "lib/",
       "languageVersion": "2.10"
     },
@@ -512,6 +542,18 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "sqlite3",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/sqlite3-0.1.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.8"
+    },
+    {
+      "name": "sqlparser",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/sqlparser-0.11.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "stack_trace",
       "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.10.0-nullsafety.6",
       "packageUri": "lib/",
@@ -525,9 +567,9 @@
     },
     {
       "name": "stream_transform",
-      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/stream_transform-2.0.0",
+      "rootUri": "file:///Users/o0oi1i/flutter/.pub-cache/hosted/pub.flutter-io.cn/stream_transform-1.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.6"
     },
     {
       "name": "string_scanner",
@@ -620,7 +662,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-11-15T01:31:15.045070Z",
+  "generated": "2021-11-15T06:13:35.013091Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-133.2.beta"
 }
