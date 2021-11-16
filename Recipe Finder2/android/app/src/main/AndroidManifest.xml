@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Recipe Finder"
+        android:label="Recipe 🔎"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -22,7 +22,7 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
+              android:resource="@drawable/launch_background"
               />
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
