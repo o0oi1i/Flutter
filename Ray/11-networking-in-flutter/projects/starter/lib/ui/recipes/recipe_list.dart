@@ -8,9 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../colors.dart';
 import '../recipe_card.dart';
 import '../widgets/custom_dropdown.dart';
+import 'recipe_details.dart';
 
 class RecipeList extends StatefulWidget {
-  const RecipeList({Key key}) : super(key: key);
+  const RecipeList({Key? key}) : super(key: key);
+
   @override
   _RecipeListState createState() => _RecipeListState();
 }
@@ -18,8 +20,9 @@ class RecipeList extends StatefulWidget {
 class _RecipeListState extends State<RecipeList> {
   static const String prefSearchKey = 'previousSearches';
 
-  TextEditingController searchTextController;
+  late TextEditingController searchTextController;
   final ScrollController _scrollController = ScrollController();
+
   // TODO: Replace with new API class
   List currentSearchList = [];
   int currentCount = 0;
@@ -30,11 +33,12 @@ class _RecipeListState extends State<RecipeList> {
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = <String>[];
-  APIRecipeQuery _currentRecipes1;
+  APIRecipeQuery? _currentRecipes1 = null;
 
   @override
   void initState() {
     super.initState();
+    // TODO: Remove call to loadRecipes()
     loadRecipes();
     getPreviousSearches();
     searchTextController = TextEditingController(text: '');
@@ -59,6 +63,9 @@ class _RecipeListState extends State<RecipeList> {
       });
   }
 
+  // TODO: Add getRecipeData() here
+
+  // TODO: Delete loadRecipes()
   Future loadRecipes() async {
     final jsonString = await rootBundle.loadString('assets/recipes1.json');
     setState(() {
@@ -80,8 +87,10 @@ class _RecipeListState extends State<RecipeList> {
   void getPreviousSearches() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(prefSearchKey)) {
-      previousSearches = prefs.getStringList(prefSearchKey);
-      if (previousSearches == null) {
+      final searches = prefs.getStringList(prefSearchKey);
+      if (searches != null) {
+        previousSearches = searches;
+      } else {
         previousSearches = <String>[];
       }
     }
@@ -191,21 +200,31 @@ class _RecipeListState extends State<RecipeList> {
     });
   }
 
+  // TODO: Replace this _buildRecipeLoader definition
   Widget _buildRecipeLoader(BuildContext context) {
-    if (_currentRecipes1 == null || _currentRecipes1.hits == null) {
+    if (_currentRecipes1 == null || _currentRecipes1?.hits == null) {
       return Container();
     }
-    // Show a loading indicator while waiting for the movies
+    // Show a loading indicator while waiting for the recipes
     return Center(
-      child: _buildRecipeCard(context, _currentRecipes1.hits, 0),
+      child: _buildRecipeCard(context, _currentRecipes1!.hits, 0),
     );
   }
 
-  Widget _buildRecipeCard(BuildContext context, List<APIHits> hits, int index) {
+  // TODO: Add _buildRecipeList()
+
+  Widget _buildRecipeCard(
+      BuildContext topLevelContext, List<APIHits> hits, int index) {
     final recipe = hits[index].recipe;
     return GestureDetector(
-      onTap: () {},
-      // TODO: Replace with new card method
+      onTap: () {
+        Navigator.push(topLevelContext, MaterialPageRoute(
+          builder: (context) {
+            return const RecipeDetails();
+          },
+        ));
+      },
+      // TODO: Replace with recipeCard
       child: recipeStringCard(recipe.image, recipe.label),
     );
   }

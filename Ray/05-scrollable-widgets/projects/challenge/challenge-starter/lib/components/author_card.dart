@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import '../fooderlich_theme.dart';
 
+import '../fooderlich_theme.dart';
 import 'circle_image.dart';
 
 class AuthorCard extends StatefulWidget {
   final String authorName;
   final String title;
-  final ImageProvider imageProvider;
+  final ImageProvider? imageProvider;
 
   const AuthorCard({
-    Key key,
-    this.authorName,
-    this.title,
+    Key? key,
+    required this.authorName,
+    required this.title,
     this.imageProvider,
   }) : super(key: key);
 
@@ -30,7 +30,10 @@ class _AuthorCardState extends State<AuthorCard> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(children: [
-            CircleImage(imageProvider: widget.imageProvider, imageRadius: 28),
+            CircleImage(
+              imageProvider: widget.imageProvider,
+              imageRadius: 28,
+            ),
             const SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

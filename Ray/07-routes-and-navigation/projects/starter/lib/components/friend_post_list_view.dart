@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import '../models/models.dart';
+
 import '../components/components.dart';
+import '../models/models.dart';
 
 class FriendPostListView extends StatelessWidget {
   final List<Post> friendPosts;
 
   const FriendPostListView({
-    Key key,
-    this.friendPosts,
+    Key? key,
+    required this.friendPosts,
   }) : super(key: key);
 
   @override

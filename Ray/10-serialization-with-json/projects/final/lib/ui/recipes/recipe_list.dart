@@ -1,17 +1,19 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../network/recipe_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../colors.dart';
-import '../recipe_card.dart';
 import '../widgets/custom_dropdown.dart';
+
+import 'dart:convert';
+import '../../network/recipe_model.dart';
+import 'package:flutter/services.dart';
+import '../recipe_card.dart';
 import 'recipe_details.dart';
 
 class RecipeList extends StatefulWidget {
-  const RecipeList({Key key}) : super(key: key);
+  const RecipeList({Key? key}) : super(key: key);
+
   @override
   _RecipeListState createState() => _RecipeListState();
 }
@@ -19,8 +21,8 @@ class RecipeList extends StatefulWidget {
 class _RecipeListState extends State<RecipeList> {
   static const String prefSearchKey = 'previousSearches';
 
-  TextEditingController searchTextController;
-  final _scrollController = ScrollController();
+  late TextEditingController searchTextController;
+  final ScrollController _scrollController = ScrollController();
   List currentSearchList = [];
   int currentCount = 0;
   int currentStartPosition = 0;
@@ -30,7 +32,7 @@ class _RecipeListState extends State<RecipeList> {
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = <String>[];
-  APIRecipeQuery _currentRecipes1;
+  APIRecipeQuery? _currentRecipes1 = null;
 
   @override
   void initState() {
@@ -80,8 +82,10 @@ class _RecipeListState extends State<RecipeList> {
   void getPreviousSearches() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(prefSearchKey)) {
-      previousSearches = prefs.getStringList(prefSearchKey);
-      if (previousSearches == null) {
+      final searches = prefs.getStringList(prefSearchKey);
+      if (searches != null) {
+        previousSearches = searches;
+      } else {
         previousSearches = <String>[];
       }
     }
@@ -192,20 +196,21 @@ class _RecipeListState extends State<RecipeList> {
   }
 
   Widget _buildRecipeLoader(BuildContext context) {
-    if (_currentRecipes1 == null || _currentRecipes1.hits == null) {
+    if (_currentRecipes1 == null || _currentRecipes1?.hits == null) {
       return Container();
     }
-    // Show a loading indicator while waiting for the movies
+    // Show a loading indicator while waiting for the recipes
     return Center(
-      child: _buildRecipeCard(context, _currentRecipes1.hits, 0),
+      child: _buildRecipeCard(context, _currentRecipes1!.hits, 0),
     );
   }
 
-  Widget _buildRecipeCard(BuildContext context, List<APIHits> hits, int index) {
+  Widget _buildRecipeCard(
+      BuildContext topLevelContext, List<APIHits> hits, int index) {
     final recipe = hits[index].recipe;
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
+        Navigator.push(topLevelContext, MaterialPageRoute(
           builder: (context) {
             return const RecipeDetails();
           },

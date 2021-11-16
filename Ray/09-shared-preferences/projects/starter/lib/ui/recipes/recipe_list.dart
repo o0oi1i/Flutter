@@ -1,16 +1,19 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+// TODO: Add imports
 
 class RecipeList extends StatefulWidget {
-  const RecipeList({Key key}) : super(key: key);
+  const RecipeList({Key? key}) : super(key: key);
+
   @override
   _RecipeListState createState() => _RecipeListState();
 }
 
 class _RecipeListState extends State<RecipeList> {
-  TextEditingController searchTextController;
-  final _scrollController = ScrollController();
+  // TODO: Add key
+  late TextEditingController searchTextController;
+  final ScrollController _scrollController = ScrollController();
   List currentSearchList = [];
   int currentCount = 0;
   int currentStartPosition = 0;
@@ -19,10 +22,12 @@ class _RecipeListState extends State<RecipeList> {
   bool hasMore = false;
   bool loading = false;
   bool inErrorState = false;
+  // TODO: Add searches array
 
   @override
   void initState() {
     super.initState();
+    // TODO: Call getPreviousSearches
     searchTextController = TextEditingController(text: '');
     _scrollController
       ..addListener(() {
@@ -50,6 +55,8 @@ class _RecipeListState extends State<RecipeList> {
     searchTextController.dispose();
     super.dispose();
   }
+
+  // TODO: Add savePreviousSearches
 
   @override
   Widget build(BuildContext context) {
@@ -83,23 +90,29 @@ class _RecipeListState extends State<RecipeList> {
             ),
             // *** Start Replace
             Expanded(
-              child: TextField(
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Search'),
-                autofocus: false,
-                controller: searchTextController,
-                onChanged: (query) => {
-                  if (query.length >= 3)
-                    {
-                      // Rebuild list
-                      setState(() {
-                        currentSearchList.clear();
-                        currentCount = 0;
-                        currentEndPosition = pageCount;
-                        currentStartPosition = 0;
-                      })
-                    }
-                },
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      decoration: const InputDecoration(
+                          border: InputBorder.none, hintText: 'Search'),
+                      autofocus: false,
+                      controller: searchTextController,
+                      onChanged: (query) => {
+                        if (query.length >= 3) {
+                            // Rebuild list
+                            setState(() {
+                                currentSearchList.clear();
+                                currentCount = 0;
+                                currentEndPosition = pageCount;
+                                currentStartPosition = 0;
+                              },
+                            )
+                          }
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
             // *** End Replace
@@ -108,6 +121,8 @@ class _RecipeListState extends State<RecipeList> {
       ),
     );
   }
+
+  // TODO: Add startSearch
 
   Widget _buildRecipeLoader(BuildContext context) {
     if (searchTextController.text.length < 3) {

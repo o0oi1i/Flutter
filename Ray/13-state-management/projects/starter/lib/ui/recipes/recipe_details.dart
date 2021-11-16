@@ -6,7 +6,7 @@ import '../colors.dart';
 
 class RecipeDetails extends StatelessWidget {
   // TODO: Replace with new constructor
-  const RecipeDetails({Key key}) : super(key: key);
+  const RecipeDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class RecipeDetails extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: CachedNetworkImage(
-                        // TODO 1
+                        // TODO: Replace imageUrl
                         imageUrl:
                             'https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg',
                         alignment: Alignment.topLeft,
@@ -47,22 +47,22 @@ class RecipeDetails extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
+                // TODO: Replace hardcoded Chicken Vesuvio
+                const Padding(
+                  padding: EdgeInsets.only(left: 16.0),
                   child: Text(
-                    // TODO 2
                     'Chicken Vesuvio',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                // TODO: Replace hardcoded calories
+                const Padding(
+                    padding: EdgeInsets.only(left: 16.0),
                     child: Chip(
-                      // TODO 3
                       label: Text('16CAL'),
                     )),
                 const SizedBox(
@@ -76,7 +76,7 @@ class RecipeDetails extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0)),
                     ),
                     onPressed: () {
-                      // TODO 4
+                      // TODO: Add insertRecipe here
                       Navigator.pop(context);
                     },
                     icon: SvgPicture.asset(

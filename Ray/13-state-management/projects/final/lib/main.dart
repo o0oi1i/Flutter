@@ -21,7 +21,7 @@ void _setupLogging() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -32,12 +32,8 @@ class MyApp extends StatelessWidget {
             lazy: false,
             create: (_) => MemoryRepository(),
           ),
-          FutureProvider(
-            create: (_) async {
-              final service = MockService();
-              service.create();
-              return service;
-            },
+          Provider(
+            create: (_)  => MockService()..create(),
             lazy: false,
           ),
         ],
@@ -51,6 +47,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: const MainScreen(),
-        ));
+        ),
+    );
   }
 }

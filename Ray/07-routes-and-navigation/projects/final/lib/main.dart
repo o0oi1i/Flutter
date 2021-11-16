@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'fooderlich_theme.dart';
 import 'package:provider/provider.dart';
+
+import 'fooderlich_theme.dart';
 import 'models/models.dart';
 import 'navigation/app_router.dart';
 
@@ -11,7 +12,7 @@ void main() {
 }
 
 class Fooderlich extends StatefulWidget {
-  const Fooderlich({Key key}) : super(key: key);
+  const Fooderlich({Key? key}) : super(key: key);
 
   @override
   _FooderlichState createState() => _FooderlichState();
@@ -21,7 +22,7 @@ class _FooderlichState extends State<Fooderlich> {
   final _groceryManager = GroceryManager();
   final _profileManager = ProfileManager();
   final _appStateManager = AppStateManager();
-  AppRouter _appRouter;
+  late AppRouter _appRouter;
 
   @override
   void initState() {

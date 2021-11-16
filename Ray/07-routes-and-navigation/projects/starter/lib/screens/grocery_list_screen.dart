@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+
 import '../components/grocery_tile.dart';
 import '../models/models.dart';
 
 class GroceryListScreen extends StatelessWidget {
   final GroceryManager manager;
 
-  const GroceryListScreen({Key key, this.manager}) : super(key: key);
+  const GroceryListScreen({
+    Key? key,
+    required this.manager,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,9 @@ class GroceryListScreen extends StatelessWidget {
                 key: Key(item.id),
                 item: item,
                 onComplete: (change) {
-                  manager.completeItem(index, change);
+                  if (change != null) {
+                    manager.completeItem(index, change);
+                  }
                 },
               ),
               onTap: () {

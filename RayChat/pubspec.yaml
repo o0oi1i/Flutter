@@ -1,0 +1,26 @@
+name: raychat
+description: A reactive chat application fueled by a Firebase Realtime Database.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: 
+  intl: 
+  firebase_core: 
+  cloud_firestore: 
+  provider:
+  firebase_auth: 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

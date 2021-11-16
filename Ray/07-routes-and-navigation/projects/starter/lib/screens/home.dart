@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'explore_screen.dart';
-import 'recipes_screen.dart';
 import 'grocery_screen.dart';
+import 'recipes_screen.dart';
 
 class Home extends StatefulWidget {
   // TODO: Home MaterialPage Helper
 
-  const Home({Key key, this.currentTab}) : super(key: key);
+  const Home({
+    Key? key,
+    required this.currentTab,
+  }) : super(key: key);
 
   final int currentTab;
 
@@ -57,6 +61,7 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+    // TODO: Add closing },);
   }
 
   Widget profileButton() {

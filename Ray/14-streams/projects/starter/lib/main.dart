@@ -21,36 +21,34 @@ void _setupLogging() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<MemoryRepository>(
-            lazy: false,
-            create: (_) => MemoryRepository(),
-          ),
-          FutureProvider(
-            create: (_) async {
-              final service = MockService();
-              service.create();
-              return service;
-            },
-            lazy: false,
-          ),
-        ],
-        child: MaterialApp(
-          title: 'Recipes',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
+      providers: [
+        // TODO: Update ChangeNotifierProvider
+        ChangeNotifierProvider<MemoryRepository>(
+          lazy: false,
+          create: (_) => MemoryRepository(),
+        ),
+        Provider(
+          create: (_) => MockService()..create(),
+          lazy: false,
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Recipes',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.white,
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: const MainScreen(),
-        ));
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: const MainScreen(),
+      ),
+    );
   }
 }

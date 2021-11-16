@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'screens/splash_screen.dart';
-import 'fooderlich_theme.dart';
 import 'package:provider/provider.dart';
+
+import 'fooderlich_theme.dart';
 import 'models/models.dart';
+import 'screens/splash_screen.dart';
 // TODO: Import app_router
 
 void main() {
@@ -12,7 +13,7 @@ void main() {
 }
 
 class Fooderlich extends StatefulWidget {
-  const Fooderlich({Key key}) : super(key: key);
+  const Fooderlich({Key? key}) : super(key: key);
 
   @override
   _FooderlichState createState() => _FooderlichState();

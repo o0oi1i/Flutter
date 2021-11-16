@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
-import '../models/models.dart';
+
 import '../components/grocery_tile.dart';
+import '../models/models.dart';
 
 class GroceryItemScreen extends StatefulWidget {
   // 1
@@ -12,14 +13,14 @@ class GroceryItemScreen extends StatefulWidget {
   // 2
   final Function(GroceryItem) onUpdate;
   // 3
-  final GroceryItem originalItem;
+  final GroceryItem? originalItem;
   // 4
   final bool isUpdating;
 
   const GroceryItemScreen({
-    Key key,
-    this.onCreate,
-    this.onUpdate,
+    Key? key,
+    required this.onCreate,
+    required this.onUpdate,
     this.originalItem,
   })  : isUpdating = (originalItem != null),
         super(key: key);
@@ -40,13 +41,14 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
   @override
   void initState() {
     // 1
-    if (widget.originalItem != null) {
-      _nameController.text = widget.originalItem.name;
-      _name = widget.originalItem.name;
-      _currentSliderValue = widget.originalItem.quantity;
-      _importance = widget.originalItem.importance;
-      _currentColor = widget.originalItem.color;
-      final date = widget.originalItem.date;
+    final originalItem = widget.originalItem;
+    if (originalItem != null) {
+      _nameController.text = originalItem.name;
+      _name = originalItem.name;
+      _currentSliderValue = originalItem.quantity;
+      _importance = originalItem.importance;
+      _currentColor = originalItem.color;
+      final date = originalItem.date;
       _timeOfDay = TimeOfDay(hour: date.hour, minute: date.minute);
       _dueDate = date;
     }
@@ -79,18 +81,19 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             onPressed: () {
               // 1
               final groceryItem = GroceryItem(
-                  id: widget.originalItem?.id ?? Uuid().v1(),
-                  name: _nameController.text,
-                  importance: _importance,
-                  color: _currentColor,
-                  quantity: _currentSliderValue,
-                  date: DateTime(
-                    _dueDate.year,
-                    _dueDate.month,
-                    _dueDate.day,
-                    _timeOfDay.hour,
-                    _timeOfDay.minute,
-                  ));
+                id: widget.originalItem?.id ?? const Uuid().v1(),
+                name: _nameController.text,
+                importance: _importance,
+                color: _currentColor,
+                quantity: _currentSliderValue,
+                date: DateTime(
+                  _dueDate.year,
+                  _dueDate.month,
+                  _dueDate.day,
+                  _timeOfDay.hour,
+                  _timeOfDay.minute,
+                ),
+              );
 
               if (widget.isUpdating) {
                 // 2
@@ -126,6 +129,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             const SizedBox(height: 16.0),
             GroceryTile(
               item: GroceryItem(
+                id: 'previewMode',
                 name: _name,
                 importance: _importance,
                 color: _currentColor,
@@ -281,8 +285,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
           ],
         ),
         // 9
-        if (_dueDate != null)
-          Text('${DateFormat('yyyy-MM-dd').format(_dueDate)}'),
+        Text('${DateFormat('yyyy-MM-dd').format(_dueDate)}'),
       ],
     );
   }
@@ -318,7 +321,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             ),
           ],
         ),
-        if (_timeOfDay != null) Text('${_timeOfDay.format(context)}'),
+        Text('${_timeOfDay.format(context)}'),
       ],
     );
   }
@@ -331,7 +334,11 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
         // 2
         Row(
           children: [
-            Container(height: 50, width: 10, color: _currentColor),
+            Container(
+              height: 50,
+              width: 10,
+              color: _currentColor,
+            ),
             const SizedBox(width: 8),
             Text('Color', style: GoogleFonts.lato(fontSize: 28)),
           ],

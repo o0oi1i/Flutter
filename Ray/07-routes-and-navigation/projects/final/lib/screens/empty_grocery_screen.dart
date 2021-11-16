@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../models/models.dart';
 
 class EmptyGroceryScreen extends StatelessWidget {
-  const EmptyGroceryScreen({Key key}) : super(key: key);
+  const EmptyGroceryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +14,12 @@ class EmptyGroceryScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AspectRatio(
-              aspectRatio: 1 / 1,
-              child: Image.asset('assets/fooderlich_assets/empty_list.png'),
+            Flexible(
+              child: AspectRatio(
+                aspectRatio: 1 / 1,
+                child: Image.asset('assets/fooderlich_assets/empty_list.png'),
+              ),
             ),
-            const SizedBox(height: 8.0),
             const Text(
               'No Groceries',
               style: TextStyle(fontSize: 21.0),
@@ -37,7 +39,7 @@ class EmptyGroceryScreen extends StatelessWidget {
               color: Colors.green,
               onPressed: () {
                 Provider.of<AppStateManager>(context, listen: false)
-                .goToRecipes();
+                    .goToRecipes();
               },
             ),
           ],
