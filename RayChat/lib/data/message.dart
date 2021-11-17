@@ -10,9 +10,10 @@ class Message {
   Message({this.text, this.date, this.email, this.reference});
 
   factory Message.fromJson(Map<dynamic, dynamic> json) => Message(
-      text: json['text'] as String,
-      date: DateTime.parse(json['date'] as String),
-      email: json['email'] as String);
+        text: json['text'] as String,
+        date: DateTime.parse(json['date'] as String),
+        email: json['email'] as String,
+      );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'date': date.toString(),
@@ -21,7 +22,7 @@ class Message {
       };
 
   factory Message.fromSnapshot(DocumentSnapshot snapshot) {
-    final message = Message.fromJson(snapshot.data() as Map<String, dynamic>);
+    final message = Message.fromJson(snapshot.data());
     message.reference = snapshot.reference;
     return message;
   }

@@ -239,10 +239,10 @@
       "name": "raychat",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.0"
+      "languageVersion": "2.2"
     }
   ],
-  "generated": "2021-11-16T08:45:46.413041Z",
+  "generated": "2021-11-17T03:22:14.600284Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-133.2.beta"
 }

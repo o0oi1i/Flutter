@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'message.dart';
 
 class MessageDao {
-  // 1
   final CollectionReference collection =
       FirebaseFirestore.instance.collection('messages');
 

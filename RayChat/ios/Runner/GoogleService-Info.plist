@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1047316086002-6svmu1u34gb0uvdcllm36jj1sm3d5vdo.apps.googleusercontent.com</string>
+	<string>141505962624-u04ljimc6aod5phnp6r81s1r3s4sgb6u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1047316086002-6svmu1u34gb0uvdcllm36jj1sm3d5vdo</string>
+	<string>com.googleusercontent.apps.141505962624-u04ljimc6aod5phnp6r81s1r3s4sgb6u</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCg6aAysT9Em3BdQVSGDVEP0G3BobEOwk4</string>
+	<string>AIzaSyA4hhR59HG8jfYTTMC76yPYxxZ2ZhvEb1E</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1047316086002</string>
+	<string>141505962624</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.raywenderlich.RayChat</string>
 	<key>PROJECT_ID</key>
-	<string>raychat-d96cf</string>
+	<string>raychat-3b10d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>raychat-d96cf.appspot.com</string>
+	<string>raychat-3b10d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1047316086002:ios:6ee8f5a62910211c40a46b</string>
+	<string>1:141505962624:ios:3759f432cc107541c8fc65</string>
 </dict>
 </plist>
