@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
-
-import '../components/sidebar/sidebar_row.dart';
-import '../components/author/author_card.dart';
+import 'package:mine/themes/ec_theme.dart';
 
 import '../model/sidebar_model.dart';
+
+import '../components/author/author_card.dart';
+import '../components/sidebar/sidebar_row.dart';
 
 class SidebarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
+        color: Colors.black,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30.0),
         ),
       ),
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width * 0.65,
+      // height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width * 0.75,
       padding: EdgeInsets.symmetric(
-        vertical: 35.0,
+        vertical: 20.0,
         horizontal: 20.0,
       ),
       child: SafeArea(
         child: Column(
           children: [
             AuthorCard(
-              authorName: 'Mike Katz',
-              title: 'Smoothie Connoisseur',
+              authorName: 'o0oi1i',
+              title: 'Hello world ! ',
               imageProvider: AssetImage('asset/images/profile.jpg'),
             ),
             SizedBox(
@@ -53,22 +54,19 @@ class SidebarScreen extends StatelessWidget {
             SidebarRow(
               item: sidebarItem[3],
             ),
-            SizedBox(
-              height: 32.0,
-            ),
             Spacer(),
             Row(
               children: [
                 Image.asset(
                   'asset/icons/icon-logout.png',
-                  width: 16.0,
+                  width: 15.0,
                 ),
                 SizedBox(
-                  width: 10.0,
+                  width: 15.0,
                 ),
                 Text(
                   "退出",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: ECTheme.darkTextTheme.headline3,
                 )
               ],
             )

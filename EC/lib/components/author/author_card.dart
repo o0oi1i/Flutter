@@ -18,7 +18,7 @@ class _AuthorCardState extends State<AuthorCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      // padding: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -27,23 +27,23 @@ class _AuthorCardState extends State<AuthorCard> {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.white,
-                radius: 28,
+                radius: 30,
                 child: CircleAvatar(
-                  radius: 23,
+                  radius: 28,
                   backgroundImage: widget.imageProvider,
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.authorName,
-                    style: ECTheme.lightTextTheme.headline2,
+                    style: ECTheme.darkTextTheme.headline2,
                   ),
                   Text(
                     widget.title,
-                    style: ECTheme.lightTextTheme.headline3,
+                    style: ECTheme.darkTextTheme.headline3,
                   ),
                 ],
               ),

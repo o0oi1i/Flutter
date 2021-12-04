@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-// import 'screens/card1.dart';
-import '../screens/card2.dart';
-import '../screens/card3.dart';
+import '../screens/card1.dart';
+// import '../screens/card2.dart';
+// import '../screens/card3.dart';
 
 import '../screens/sidebar_screen.dart';
 
@@ -17,11 +17,8 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
+    Card1(),
     SidebarScreen(),
-    const Card2(),
-    const Card3(),
-    const Card3(),
-    const Card3(),
   ];
 
   void _onItemTapped(int index) {
