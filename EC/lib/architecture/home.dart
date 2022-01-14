@@ -30,13 +30,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'EC',
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     'EC',
+      //     style: Theme.of(context).textTheme.headline1,
+      //   ),
+      //   backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      // ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
