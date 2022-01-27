@@ -25,7 +25,7 @@ class Body extends StatelessWidget {
         'Flutter Skeleton',
         textDirection: TextDirection.ltr,
         style: TextStyle(
-          fontSize: 36.0,
+          fontSize: 23.0,
           color: Colors.deepPurple.shade300,
         ),
       ),
