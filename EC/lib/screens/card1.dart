@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mine/model/course.dart';
 import '../components/course/course_card.dart';
+import '../components/navbar/navbar.dart';
 
 class Card1 extends StatelessWidget {
   const Card1({Key key}) : super(key: key);
@@ -13,28 +14,32 @@ class Card1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        scrollDirection: Axis.horizontal,
-        itemCount: 4,
-        itemBuilder: /*1*/ (context, i) {
-          return CourseCard(
-            course: recentCourses[i],
-          );
-        },
+    return Container(
+      child: SafeArea(
+        child: Column(
+          children: [
+            NavBar(),
+            Center(
+              child: Container(
+                width: 1000,
+                height: 350,
+                child: Center(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    itemBuilder: /*1*/ (context, i) {
+                      return CourseCard(
+                        course: recentCourses[i],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-
-      // child: Column(
-      //   children: [
-      //     RecentCourseCard(
-      //       course: recentCourses[0],
-      //     ),
-      //     RecentCourseCard(
-      //       course: recentCourses[1],
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
