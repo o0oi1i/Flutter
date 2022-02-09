@@ -40,9 +40,10 @@ class Body extends StatelessWidget {
               value['title'],
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w600),
+                fontSize: 16,
+                color: Colors.black45,
+                fontWeight: FontWeight.w600,
+              ),
             )
           ],
         ),
