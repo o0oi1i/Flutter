@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
     return Container(
       height: 400.0,
       width: 300.0,
-      color: Colors.pink,
+      color: Colors.purple,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
