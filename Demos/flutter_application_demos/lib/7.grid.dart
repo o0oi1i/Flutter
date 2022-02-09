@@ -8,7 +8,7 @@ class Grid extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('List'),
+          title: Text('Grid'),
         ),
         body: Body(),
       ),
