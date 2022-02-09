@@ -6,7 +6,7 @@ class Rows extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Padding'),
+          title: Text('Row'),
         ),
         body: Body(),
       ),
