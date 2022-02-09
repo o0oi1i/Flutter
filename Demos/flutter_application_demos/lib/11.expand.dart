@@ -37,8 +37,8 @@ class Body extends StatelessWidget {
 }
 
 class IconContainer extends StatelessWidget {
-  IconData icon;
-  Color color;
+  final IconData icon;
+  final Color color;
 
   IconContainer(this.icon, {this.color});
 
