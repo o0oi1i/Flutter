@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '6.List/data/listData.dart';
-
 class Paddings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
