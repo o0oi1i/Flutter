@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../navs/Search.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,7 +33,6 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-          SizedBox(height: 20),
           RaisedButton(
             child: Text("Push to Product"),
             textTheme: ButtonTextTheme.primary,
