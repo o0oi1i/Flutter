@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'tabs/Home.dart';
 import 'tabs/Category.dart';
-import 'tabs/Setting.dart';
 
 class Navs extends StatelessWidget {
   @override
@@ -23,7 +22,6 @@ class _HomeState extends State<Home> {
   List _pageList = [
     HomePage(),
     CategoryPage(),
-    SettingPage(),
   ];
 
   int _currentIndex = 0;
@@ -45,10 +43,6 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: "Category",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Setting",
           ),
         ],
         onTap: (int index) {
