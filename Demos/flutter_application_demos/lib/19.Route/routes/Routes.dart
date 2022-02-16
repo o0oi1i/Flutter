@@ -16,7 +16,7 @@ final Map<String, Function> routes = {
   '/search': (context, {arguments}) => SearchPage(arguments: arguments),
 };
 
-void onGenerateRoute = (RouteSettings settings) {
+var onGenerateRoute = (RouteSettings settings) {
   final String name = settings.name;
   final Function pageContentBuilder = routes[name];
 
