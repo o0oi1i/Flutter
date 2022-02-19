@@ -26,8 +26,9 @@ import 'package:flutter/material.dart';
 // import '20.Replace/20.Replace.dart';
 // import '22.TabBar/22.TabBar.dart';
 // import '23.Drawer/23.Drawer.dart';
-import '24.Button/24.Button.dart';
+// import '24.Button/24.Button.dart';
+import '25.Floating/25.Floating.dart';
 
 void main() {
-  runApp(Buttons());
+  runApp(Floating());
 }
