@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -45,6 +47,21 @@ class _BodyState extends State<Body> {
             child: Text('FlutterToast'),
             onPressed: _toast,
           ),
+          SizedBox(height: 20),
+          RaisedButton(
+            child: Text('My Dialog'),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return MyDialog(
+                    title: "Title",
+                    content: "Content",
+                  );
+                },
+              );
+            },
+          )
         ],
       ),
     );
@@ -166,5 +183,66 @@ class _BodyState extends State<Body> {
       textColor: Colors.white,
       fontSize: 16.0,
     );
+  }
+}
+
+class MyDialog extends Dialog {
+  String title;
+  String content;
+
+  MyDialog({this.title = "", this.content = ""});
+
+  @override
+  Widget build(BuildContext context) {
+    _showTimer(context);
+    return Material(
+      type: MaterialType.transparency,
+      child: Center(
+        child: Container(
+          height: 300,
+          width: 300,
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text("${this.title}"),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        child: Icon(Icons.close),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Divider(),
+              Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                child: Text("${this.content}", textAlign: TextAlign.center),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _showTimer(context) {
+    var timer;
+    timer = Timer.periodic(Duration(milliseconds: 3000), (t) {
+      print('Close');
+      Navigator.pop(context);
+      timer.cancel();
+    });
   }
 }
