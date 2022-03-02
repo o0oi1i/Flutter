@@ -34,8 +34,9 @@ import 'package:flutter/material.dart';
 // import '29.textField.dart';
 // import '30.form.dart';
 // import '31.datePicker.dart';
-import '32.swiper.dart';
+// import '32.swiper.dart';
+import '33.dialog.dart';
 
 void main() {
-  runApp(Swipers());
+  runApp(Dialogs());
 }
