@@ -36,8 +36,9 @@ import 'package:flutter/material.dart';
 // import '31.datePicker.dart';
 // import '32.swiper.dart';
 // import '33.dialog.dart';
-import '34.http.dart';
+// import '34.http.dart';
+import '35.dio.dart';
 
 void main() {
-  runApp(Http());
+  runApp(Dios());
 }
