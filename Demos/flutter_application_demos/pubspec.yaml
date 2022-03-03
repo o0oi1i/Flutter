@@ -33,6 +33,7 @@ dependencies:
   fluttertoast:
   http:
   dio:
+  flutter_html:
 
 dev_dependencies:
   flutter_test:
