@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'themes/ec_theme.dart';
 import 'routers/router.dart';
@@ -13,11 +14,13 @@ class EC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = ECTheme.dark();
-    return MaterialApp(
-      title: 'EC',
-      theme: theme,
-      initialRoute: '/',
-      onGenerateRoute: onGenerateRoute,
+    return ScreenUtilInit(
+      builder: () => MaterialApp(
+        title: 'EC',
+        theme: theme,
+        initialRoute: '/',
+        onGenerateRoute: onGenerateRoute,
+      ),
     );
   }
 }

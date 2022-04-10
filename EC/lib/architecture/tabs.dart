@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/card1.dart';
+import '../screens/home.dart';
 // import '../screens/card2.dart';
 // import '../screens/card3.dart';
 
@@ -17,7 +17,7 @@ class _TabsState extends State<Tabs> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
-    Card1(),
+    Home(),
     SidebarScreen(),
   ];
 
