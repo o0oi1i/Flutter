@@ -27,8 +27,8 @@ class Home extends StatelessWidget {
             TitleLab(value: "热门推荐"),
             Center(
               child: Container(
-                width: 1000,
-                height: 300,
+                height: ScreenUtil().setHeight(440),
+                // color: Colors.red,
                 child: Center(
                   child: ListView.builder(
                     padding: EdgeInsets.fromLTRB(
@@ -38,8 +38,8 @@ class Home extends StatelessWidget {
                       ScreenUtil().setWidth(0),
                     ),
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
-                    itemBuilder: /*1*/ (context, i) {
+                    itemCount: recentCourses.length,
+                    itemBuilder: (context, i) {
                       return CourseCard(
                         course: recentCourses[i],
                       );
@@ -48,6 +48,7 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
+            TitleLab(value: "猜您喜欢"),
           ],
         ),
       ),
