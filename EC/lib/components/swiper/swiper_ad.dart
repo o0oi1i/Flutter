@@ -16,6 +16,7 @@ class SwiperAd extends StatelessWidget {
     ];
 
     return Container(
+      padding: EdgeInsets.all(5),
       child: AspectRatio(
         aspectRatio: 2 / 1,
         child: Swiper(
@@ -28,7 +29,7 @@ class SwiperAd extends StatelessWidget {
           itemCount: imgList.length,
           pagination: new SwiperPagination(
             builder: DotSwiperPaginationBuilder(
-              color: Colors.grey,
+              color: Color.fromARGB(255, 209, 209, 209),
               activeColor: Colors.white,
             ),
           ),

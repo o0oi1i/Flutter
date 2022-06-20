@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../screens/home.dart';
-// import '../screens/card2.dart';
-// import '../screens/card3.dart';
 
 import '../screens/sidebar_screen.dart';
 
@@ -40,15 +38,11 @@ class _TabsState extends State<Tabs> {
         items: <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
             icon: Icon(Icons.find_in_page),
-            label: '发现',
+            label: '首页',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: '分类',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.grade),
-            label: '成就',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.book),
