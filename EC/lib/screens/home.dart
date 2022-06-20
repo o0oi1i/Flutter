@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:mine/model/course.dart';
+
 import '../components/course/course_card.dart';
 import '../components/navbar/navbar.dart';
 import '../components/swiper/swiper_ad.dart';
@@ -29,7 +31,12 @@ class Home extends StatelessWidget {
                 height: 300,
                 child: Center(
                   child: ListView.builder(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.fromLTRB(
+                      ScreenUtil().setWidth(16),
+                      ScreenUtil().setHeight(5),
+                      ScreenUtil().setWidth(16),
+                      ScreenUtil().setWidth(0),
+                    ),
                     scrollDirection: Axis.horizontal,
                     itemCount: 4,
                     itemBuilder: /*1*/ (context, i) {

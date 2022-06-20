@@ -15,6 +15,7 @@ class EC extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ECTheme.dark();
     return ScreenUtilInit(
+      designSize: Size(750, 1334),
       builder: () => MaterialApp(
         title: 'EC',
         theme: theme,
