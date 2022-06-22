@@ -74,6 +74,34 @@ var recentCourses = [
     illustration: 'illustration-08.png',
     logo: 'go-logo.png',
   ),
+  Course(
+    courseTitle: "Flutter",
+    courseSubtitle: "12 sections",
+    background: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFF0076FF),
+        Color(0xFF00AEFF),
+      ],
+    ),
+    illustration: 'illustration-01.png',
+    logo: 'flutter-logo.png',
+  ),
+  Course(
+    courseTitle: "Design",
+    courseSubtitle: "30 sections",
+    background: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFFFD504F),
+        Color(0xFFFF8181),
+      ],
+    ),
+    illustration: 'illustration-02.png',
+    logo: 'protopie-logo.png',
+  )
 ];
 
 // Explore Courses

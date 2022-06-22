@@ -28,7 +28,6 @@ class Home extends StatelessWidget {
             Center(
               child: Container(
                 height: ScreenUtil().setHeight(440),
-                // color: Colors.red,
                 child: Center(
                   child: ListView.builder(
                     padding: EdgeInsets.fromLTRB(
@@ -49,6 +48,28 @@ class Home extends StatelessWidget {
               ),
             ),
             TitleLab(value: "猜您喜欢"),
+            Center(
+              child: Container(
+                height: ScreenUtil().setHeight(500),
+                child: Center(
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: recentCourses.length,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1,
+                    ),
+                    itemBuilder: (context, i) {
+                      return CourseCard(
+                        course: recentCourses[i],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
