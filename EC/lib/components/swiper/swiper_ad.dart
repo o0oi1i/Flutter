@@ -2,40 +2,65 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
-class SwiperAd extends StatelessWidget {
+import 'package:dio/dio.dart';
+
+// import 'dart:convert';
+
+import '../../model/advertise.dart';
+
+class SwiperAd extends StatefulWidget {
+  @override
+  State<SwiperAd> createState() => _SwiperAdState();
+}
+
+class _SwiperAdState extends State<SwiperAd> {
+  List _adList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getAdListData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _swiperWidget();
   }
 
   Widget _swiperWidget() {
-    List<Map> imgList = [
-      {"url": "https://www.itying.com/images/flutter/slide01.jpg"},
-      {"url": "https://www.itying.com/images/flutter/slide02.jpg"},
-      {"url": "https://www.itying.com/images/flutter/slide03.jpg"},
-    ];
-
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: AspectRatio(
         aspectRatio: 2 / 1,
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
+            String pic = _adList[index].pic;
             return new Image.network(
-              imgList[index]["url"],
+              "https://jdmall.itying.com/${pic.replaceAll('\\', '/')}",
               fit: BoxFit.fill,
             );
           },
-          itemCount: imgList.length,
+          itemCount: _adList.length,
           pagination: new SwiperPagination(
             builder: DotSwiperPaginationBuilder(
               color: Color.fromARGB(255, 209, 209, 209),
               activeColor: Colors.white,
+              size: 8,
             ),
           ),
           autoplay: true,
         ),
       ),
     );
+  }
+
+  _getAdListData() async {
+    var api = 'https://jdmall.itying.com/api/focus';
+    var result = await Dio().get(api);
+    var adList = Advertise.fromJson(result.data);
+
+    setState(() {
+      this._adList = adList.result;
+    });
   }
 }

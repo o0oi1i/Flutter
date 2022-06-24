@@ -10,7 +10,7 @@ import '../components/label/title_lab.dart';
 
 class Home extends StatelessWidget {
   const Home({Key key}) : super(key: key);
-  // 1
+
   final String category = 'Editor\'s Choice';
   final String title = 'The Art of Dough';
   final String description = 'Learn to make the perfect bread.';
