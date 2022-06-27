@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 
 // import 'dart:convert';
 
+import '../../config/config.dart';
 import '../../model/advertise.dart';
 
 class SwiperAd extends StatefulWidget {
@@ -36,7 +37,7 @@ class _SwiperAdState extends State<SwiperAd> {
           itemBuilder: (BuildContext context, int index) {
             String pic = _adList[index].pic;
             return new Image.network(
-              "https://jdmall.itying.com/${pic.replaceAll('\\', '/')}",
+              "${Config.domain}${pic.replaceAll('\\', '/')}",
               fit: BoxFit.fill,
             );
           },
@@ -55,7 +56,7 @@ class _SwiperAdState extends State<SwiperAd> {
   }
 
   _getAdListData() async {
-    var api = 'https://jdmall.itying.com/api/focus';
+    var api = '${Config.domain}api/focus';
     var result = await Dio().get(api);
     var adList = Advertise.fromJson(result.data);
 

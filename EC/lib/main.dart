@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'themes/ec_theme.dart';
+
 import 'routers/router.dart';
+import 'themes/ec_theme.dart';
 
 void main() {
   runApp(EC());

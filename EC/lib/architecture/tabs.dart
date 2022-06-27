@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/home.dart';
-
+import '../screens/category.dart';
 import '../screens/sidebar_screen.dart';
 
 class Tabs extends StatefulWidget {
@@ -16,6 +16,7 @@ class _TabsState extends State<Tabs> {
 
   static List<Widget> pages = <Widget>[
     Home(),
+    Category(),
     SidebarScreen(),
   ];
 
@@ -30,14 +31,14 @@ class _TabsState extends State<Tabs> {
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: false,
+        showUnselectedLabels: true,
         selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
-            icon: Icon(Icons.find_in_page),
+            icon: Icon(Icons.home),
             label: '首页',
           ),
           const BottomNavigationBarItem(
