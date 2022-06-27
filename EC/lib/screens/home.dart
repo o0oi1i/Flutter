@@ -8,16 +8,28 @@ import '../components/navbar/navbar.dart';
 import '../components/swiper/swiper_ad.dart';
 import '../components/label/title_lab.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   final String category = 'Editor\'s Choice';
+
   final String title = 'The Art of Dough';
+
   final String description = 'Learn to make the perfect bread.';
+
   final String chef = 'Ray Wenderlich';
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       child: SafeArea(
         child: ListView(

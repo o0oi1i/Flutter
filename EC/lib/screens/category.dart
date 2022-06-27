@@ -12,10 +12,14 @@ class Category extends StatefulWidget {
   _CategoryState createState() => _CategoryState();
 }
 
-class _CategoryState extends State<Category> {
+class _CategoryState extends State<Category>
+    with AutomaticKeepAliveClientMixin {
   int _selectIndex = 0;
   List _leftCateList = [];
   List _rightCateList = [];
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -44,6 +48,7 @@ class _CategoryState extends State<Category> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var leftWidth = ScreenAdaper.getScreenWidth() / 4;
 
     var rightItemWidth = ScreenAdaper.width(

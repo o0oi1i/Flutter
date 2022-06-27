@@ -14,6 +14,13 @@ class Tabs extends StatefulWidget {
 class _TabsState extends State<Tabs> {
   int _selectedIndex = 0;
 
+  PageController _pageController;
+  @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController(initialPage: _selectedIndex);
+  }
+
   static List<Widget> pages = <Widget>[
     Home(),
     Category(),
@@ -23,13 +30,17 @@ class _TabsState extends State<Tabs> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      _pageController.jumpToPage(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_selectedIndex],
+      body: PageView(
+        controller: _pageController,
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
