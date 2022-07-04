@@ -27,7 +27,13 @@ class AdvertiseItem {
   String pic;
   String url;
 
-  AdvertiseItem({this.aId, this.title, this.status, this.pic, this.url});
+  AdvertiseItem({
+    this.aId,
+    this.title,
+    this.status,
+    this.pic,
+    this.url,
+  });
 
   AdvertiseItem.fromJson(Map<String, dynamic> json) {
     aId = json['_id'];

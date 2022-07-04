@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../screens/home.dart';
 import '../screens/category.dart';
-import '../screens/sidebar_screen.dart';
+import '../screens/lessons.dart';
+import '../screens/sidebar.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({Key key}) : super(key: key);
@@ -24,6 +25,7 @@ class _TabsState extends State<Tabs> {
   static List<Widget> pages = <Widget>[
     Home(),
     Category(),
+    Lessons(),
     SidebarScreen(),
   ];
 
