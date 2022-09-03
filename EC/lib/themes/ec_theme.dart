@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ECTheme {
+  static ThemeData light() {
+    return ThemeData(
+      brightness: Brightness.light,
+      appBarTheme: const AppBarTheme(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: Color(0xFFE040FB),
+      ),
+      textTheme: lightTextTheme,
+    );
+  }
+
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -23,24 +37,24 @@ class ECTheme {
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
-    headline4: GoogleFonts.openSans(
+    headline6: GoogleFonts.openSans(
       fontSize: 14.0,
       fontWeight: FontWeight.w400,
       color: Colors.black,
     ),
   );
 
-  static ThemeData light() {
+  static ThemeData dark() {
     return ThemeData(
-      brightness: Brightness.light,
-      appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+      brightness: Brightness.dark,
+      appBarTheme: AppBarTheme(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.grey[900],
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Color(0xFFE040FB),
+        selectedItemColor: Color(0xFFAA00FF),
       ),
-      textTheme: lightTextTheme,
+      textTheme: darkTextTheme,
     );
   }
 
@@ -71,18 +85,4 @@ class ECTheme {
       color: Colors.white,
     ),
   );
-
-  static ThemeData dark() {
-    return ThemeData(
-      brightness: Brightness.dark,
-      appBarTheme: AppBarTheme(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[900],
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Color(0xFFAA00FF),
-      ),
-      textTheme: darkTextTheme,
-    );
-  }
 }

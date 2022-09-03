@@ -7,8 +7,12 @@ class AuthorCard extends StatefulWidget {
   final String title;
   final ImageProvider imageProvider;
 
-  const AuthorCard({Key key, this.authorName, this.title, this.imageProvider})
-      : super(key: key);
+  const AuthorCard({
+    Key key,
+    this.authorName,
+    this.title,
+    this.imageProvider,
+  }) : super(key: key);
 
   @override
   _AuthorCardState createState() => _AuthorCardState();

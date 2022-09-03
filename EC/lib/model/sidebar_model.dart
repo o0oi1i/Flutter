@@ -33,7 +33,10 @@ var sidebarItem = [
     background: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [Color(0xFFFA7d75), Color(0xFFC23D61)]),
+        colors: [
+          Color(0xFFFA7d75),
+          Color(0xFFC23D61),
+        ]),
     icon: Icon(
       Icons.library_books,
       color: Colors.white,
@@ -44,7 +47,10 @@ var sidebarItem = [
     background: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [Color(0xFFFAD64A), Color(0xFFEA880F)]),
+        colors: [
+          Color(0xFFFAD64A),
+          Color(0xFFEA880F),
+        ]),
     icon: Icon(
       Icons.credit_card,
       color: Colors.white,
@@ -55,7 +61,10 @@ var sidebarItem = [
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [Color(0xFF4E62CC), Color(0xFF202A78)],
+      colors: [
+        Color.fromARGB(255, 242, 170, 232),
+        Color.fromARGB(255, 234, 25, 192),
+      ],
     ),
     icon: Icon(
       Icons.settings,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../screens/home.dart';
-import '../screens/category.dart';
-import '../screens/lessons.dart';
-import '../screens/sidebar.dart';
+import '../pages/home.dart';
+import '../pages/category.dart';
+import '../pages/lessons.dart';
+import '../pages/sidebar.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({Key key}) : super(key: key);
@@ -14,8 +14,8 @@ class Tabs extends StatefulWidget {
 
 class _TabsState extends State<Tabs> {
   int _selectedIndex = 0;
-
   PageController _pageController;
+
   @override
   void initState() {
     super.initState();

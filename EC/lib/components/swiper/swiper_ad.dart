@@ -4,8 +4,6 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
 import 'package:dio/dio.dart';
 
-// import 'dart:convert';
-
 import '../../config/config.dart';
 import '../../model/advertise.dart';
 

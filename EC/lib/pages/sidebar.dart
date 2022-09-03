@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mine/themes/ec_theme.dart';
 
+import '../themes/ec_theme.dart';
 import '../model/sidebar_model.dart';
 
 import '../components/author/author_card.dart';
