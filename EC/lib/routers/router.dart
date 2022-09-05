@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../architecture/tabs.dart';
+import '../pages/Lessons.dart';
 
 final Map<String, Function> routes = {
   '/': (context) => Tabs(),
+  '/lessons': (context, {arguments}) => Lessons(arguments: arguments),
 };
 
 // ignore: missing_return

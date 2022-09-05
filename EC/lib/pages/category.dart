@@ -126,18 +126,27 @@ class _CategoryState extends State<Category>
             itemBuilder: (context, index) {
               String pic = _rightCateList[index].pic;
               pic = Config.domain + pic.replaceAll('\\', '/');
-              return Container(
-                child: Column(
-                  children: <Widget>[
-                    AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: Image.network("$pic", fit: BoxFit.cover),
-                    ),
-                    Container(
-                      height: ScreenAdaper.height(28),
-                      child: Text("${_rightCateList[index].title}"),
-                    )
-                  ],
+              return InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/lessons',
+                    arguments: {"pid": this._rightCateList[index].pid},
+                  );
+                },
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: Image.network("$pic", fit: BoxFit.cover),
+                      ),
+                      Container(
+                        height: ScreenAdaper.height(28),
+                        child: Text("${_rightCateList[index].title}"),
+                      )
+                    ],
+                  ),
                 ),
               );
             },

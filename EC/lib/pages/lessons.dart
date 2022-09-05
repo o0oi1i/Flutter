@@ -7,16 +7,18 @@ import '../services/ScreenAdaper.dart';
 import '../config/Config.dart';
 import '../model/lesson.dart';
 
+// ignore: must_be_immutable
 class Lessons extends StatefulWidget {
   Map arguments;
 
-  Lessons({Key key, arguments}) : super(key: key);
+  Lessons({Key key, this.arguments}) : super(key: key);
 
   _LessonsState createState() => _LessonsState();
 }
 
 class _LessonsState extends State<Lessons> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   ScrollController _scrollController = ScrollController();
 
   String _sort = "";
@@ -40,10 +42,8 @@ class _LessonsState extends State<Lessons> {
   void initState() {
     super.initState();
     _getLessonsListData();
-    //监听滚动条滚动事件
+
     _scrollController.addListener(() {
-      //_scrollController.position.pixels //获取滚动条滚动的高度
-      //_scrollController.position.maxScrollExtent  //获取页面高度
       if (_scrollController.position.pixels >
           _scrollController.position.maxScrollExtent - 20) {
         if (_flag && _hasMore) {
@@ -60,16 +60,18 @@ class _LessonsState extends State<Lessons> {
       appBar: AppBar(
         title: Text("课程列表"),
         leading: IconButton(
-            onPressed: () {
-              //注意：新版本的Flutter中加入Drawer组件会导致默认的返回按钮失效，所以我们需要手动加一下返回按钮
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back)),
-        actions: <Widget>[Text("")],
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: <Widget>[
+          Text(""),
+        ],
       ),
       endDrawer: Drawer(
         child: Container(
-          child: Text("实现筛选功能"),
+          child: Text("筛选"),
         ),
       ),
       body: Stack(
@@ -98,7 +100,7 @@ class _LessonsState extends State<Lessons> {
                     Container(
                       width: ScreenAdaper.width(180),
                       height: ScreenAdaper.height(180),
-                      child: Image.network("${pic}", fit: BoxFit.cover),
+                      child: Image.network("$pic", fit: BoxFit.cover),
                     ),
                     Expanded(
                       flex: 1,
@@ -109,27 +111,30 @@ class _LessonsState extends State<Lessons> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("${_lessonsList[index].title}",
-                                maxLines: 2, overflow: TextOverflow.ellipsis),
+                            Text(
+                              "${_lessonsList[index].title}",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                             Row(
                               children: <Widget>[
                                 Container(
                                   height: ScreenAdaper.height(36),
                                   margin: EdgeInsets.only(right: 10),
-                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromRGBO(230, 230, 230, 0.9),
+                                    color: Colors.lightBlue[300],
                                   ),
                                   child: Text("4g"),
                                 ),
                                 Container(
                                   height: ScreenAdaper.height(36),
                                   margin: EdgeInsets.only(right: 10),
-                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromRGBO(230, 230, 230, 0.9),
+                                    color: Colors.lightGreen[500],
                                   ),
                                   child: Text("126"),
                                 ),
@@ -137,7 +142,8 @@ class _LessonsState extends State<Lessons> {
                             ),
                             Text(
                               "¥${_lessonsList[index].price}",
-                              style: TextStyle(color: Colors.red, fontSize: 16),
+                              style: TextStyle(
+                                  color: Colors.pink[200], fontSize: 18),
                             )
                           ],
                         ),
@@ -167,9 +173,13 @@ class _LessonsState extends State<Lessons> {
         width: ScreenAdaper.width(750),
         height: ScreenAdaper.height(80),
         decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(
-                    width: 1, color: Color.fromRGBO(233, 233, 233, 0.9)))),
+          border: Border(
+            bottom: BorderSide(
+              width: 1,
+              color: Colors.blueGrey,
+            ),
+          ),
+        ),
         child: Row(
           children: _subHeaderList.map((value) {
             return Expanded(
@@ -177,7 +187,11 @@ class _LessonsState extends State<Lessons> {
               child: InkWell(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(
-                      0, ScreenAdaper.height(16), 0, ScreenAdaper.height(16)),
+                    0,
+                    ScreenAdaper.height(16),
+                    0,
+                    ScreenAdaper.height(16),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -186,8 +200,8 @@ class _LessonsState extends State<Lessons> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: (_selectHeaderId == value["id"])
-                                ? Colors.red
-                                : Colors.black54),
+                                ? Colors.purpleAccent
+                                : Colors.white),
                       ),
                       _showIcon(value["id"])
                     ],
@@ -209,21 +223,24 @@ class _LessonsState extends State<Lessons> {
       _flag = false;
     });
 
+    print(widget.arguments);
     var api =
-        '${Config.domain}api/plist?cid=${widget.arguments["cid"]}&page=${_page}&sort=${_sort}&pageSize=${_pageSize}';
+        '${Config.domain}api/plist?cid=${widget.arguments["pid"]}&page=$_page&sort=$_sort&pageSize=$_pageSize';
+    print(api);
+
     var result = await Dio().get(api);
     var lessonsList = new Lesson.fromJson(result.data);
     if (lessonsList.result.length < _pageSize) {
       setState(() {
-        _flag = true;
-        _hasMore = false;
         _lessonsList.addAll(lessonsList.result);
+        _hasMore = false;
+        _flag = true;
       });
     } else {
       setState(() {
-        _page++;
-        _flag = true;
         _lessonsList.addAll(lessonsList.result);
+        _flag = true;
+        _page++;
       });
     }
   }
@@ -253,9 +270,15 @@ class _LessonsState extends State<Lessons> {
   Widget _showIcon(id) {
     if (id == 2 || id == 3) {
       if (_subHeaderList[id - 1]["sort"] == 1) {
-        return Icon(Icons.arrow_drop_down);
+        return Icon(
+          Icons.arrow_drop_down,
+          color: Colors.purple[100],
+        );
       }
-      return Icon(Icons.arrow_drop_up);
+      return Icon(
+        Icons.arrow_drop_up,
+        color: Colors.blue[100],
+      );
     }
     return Text("");
   }
@@ -265,7 +288,6 @@ class _LessonsState extends State<Lessons> {
       return (index == _lessonsList.length - 1) ? Loading() : Text("");
     } else {
       return (index == _lessonsList.length - 1) ? Text("--我是有底线的--") : Text("");
-      ;
     }
   }
 }

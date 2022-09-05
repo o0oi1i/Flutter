@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../pages/home.dart';
 import '../pages/category.dart';
-import '../pages/lessons.dart';
 import '../pages/sidebar.dart';
 
 class Tabs extends StatefulWidget {
@@ -25,7 +24,6 @@ class _TabsState extends State<Tabs> {
   static List<Widget> pages = <Widget>[
     Home(),
     Category(),
-    Lessons(),
     SidebarScreen(),
   ];
 
@@ -57,10 +55,6 @@ class _TabsState extends State<Tabs> {
           const BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: '分类',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: '学习',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.settings),
