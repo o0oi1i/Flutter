@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../model/cate.dart';
 import '../config/config.dart';
-import '../services/ScreenAdaper.dart';
+import '../services/ScreenAdapter.dart';
 
 class Category extends StatefulWidget {
   Category({Key key}) : super(key: key);
@@ -49,11 +49,11 @@ class _CategoryState extends State<Category>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    var leftWidth = ScreenAdaper.getScreenWidth() / 4;
+    var leftWidth = ScreenAdapter.getScreenWidth() / 4;
 
-    var rightItemWidth = ScreenAdaper.width(
-        (ScreenAdaper.getScreenWidth() - leftWidth - 20 - 20) / 3);
-    var rightItemHeight = rightItemWidth + ScreenAdaper.height(28);
+    var rightItemWidth = ScreenAdapter.width(
+        (ScreenAdapter.getScreenWidth() - leftWidth - 20 - 20) / 3);
+    var rightItemHeight = rightItemWidth + ScreenAdapter.height(28);
 
     return Row(
       children: <Widget>[
@@ -82,8 +82,8 @@ class _CategoryState extends State<Category>
                   },
                   child: Container(
                     width: double.infinity,
-                    height: ScreenAdaper.height(84),
-                    padding: EdgeInsets.only(top: ScreenAdaper.height(24)),
+                    height: ScreenAdapter.height(84),
+                    padding: EdgeInsets.only(top: ScreenAdapter.height(24)),
                     child: Text(
                       "${_leftCateList[index].title}",
                       textAlign: TextAlign.center,
@@ -142,7 +142,7 @@ class _CategoryState extends State<Category>
                         child: Image.network("$pic", fit: BoxFit.cover),
                       ),
                       Container(
-                        height: ScreenAdaper.height(28),
+                        height: ScreenAdapter.height(28),
                         child: Text("${_rightCateList[index].title}"),
                       )
                     ],

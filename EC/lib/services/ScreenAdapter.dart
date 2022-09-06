@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ScreenAdaper {
+class ScreenAdapter {
   static width(num value) {
     return ScreenUtil().setWidth(value);
   }

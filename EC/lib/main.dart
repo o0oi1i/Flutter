@@ -21,6 +21,7 @@ class EC extends StatelessWidget {
         theme: theme,
         initialRoute: '/',
         onGenerateRoute: onGenerateRoute,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

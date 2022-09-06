@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import '../components/load/loading.dart';
-import '../services/ScreenAdaper.dart';
+import '../services/ScreenAdapter.dart';
 import '../config/Config.dart';
 import '../model/lesson.dart';
 
@@ -30,6 +30,10 @@ class _LessonsState extends State<Lessons> {
   int _pageSize = 8;
   int _selectHeaderId = 1;
 
+  var _initKeywordsController = new TextEditingController();
+  var _pid;
+  var _keywords;
+
   List _lessonsList = [];
   List _subHeaderList = [
     {"id": 1, "title": "综合", "fields": "all", "sort": -1},
@@ -41,6 +45,12 @@ class _LessonsState extends State<Lessons> {
   @override
   void initState() {
     super.initState();
+    this._pid = widget.arguments["pid"];
+    this._keywords = widget.arguments["keywords"];
+    if (this._keywords != null) {
+      this._initKeywordsController.text = this._keywords; //类型断言
+    }
+
     _getLessonsListData();
 
     _scrollController.addListener(() {
@@ -58,15 +68,46 @@ class _LessonsState extends State<Lessons> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("课程列表"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        title: Container(
+          child: TextField(
+            controller: this._initKeywordsController,
+            autofocus: false,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
+              ),
+            ),
+            onChanged: (value) {
+              setState(() {
+                this._keywords = value;
+              });
+            },
+          ),
+          height: ScreenAdapter.height(68),
+          decoration: BoxDecoration(
+              color: Color.fromRGBO(233, 233, 233, 0.8),
+              borderRadius: BorderRadius.circular(30)),
+        ),
         actions: <Widget>[
-          Text(""),
+          InkWell(
+            child: Container(
+              height: ScreenAdapter.height(68),
+              width: ScreenAdapter.width(80),
+              child: Row(
+                children: <Widget>[Text("搜索")],
+              ),
+            ),
+            onTap: () {
+              this._subHeaderChange(1);
+            },
+          )
         ],
       ),
       endDrawer: Drawer(
@@ -87,7 +128,7 @@ class _LessonsState extends State<Lessons> {
     if (_lessonsList.length > 0) {
       return Container(
         padding: EdgeInsets.all(10),
-        margin: EdgeInsets.only(top: ScreenAdaper.height(80)),
+        margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
         child: ListView.builder(
           controller: _scrollController,
           itemBuilder: (context, index) {
@@ -98,14 +139,14 @@ class _LessonsState extends State<Lessons> {
                 Row(
                   children: <Widget>[
                     Container(
-                      width: ScreenAdaper.width(180),
-                      height: ScreenAdaper.height(180),
+                      width: ScreenAdapter.width(180),
+                      height: ScreenAdapter.height(180),
                       child: Image.network("$pic", fit: BoxFit.cover),
                     ),
                     Expanded(
                       flex: 1,
                       child: Container(
-                        height: ScreenAdaper.height(180),
+                        height: ScreenAdapter.height(180),
                         margin: EdgeInsets.only(left: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +160,7 @@ class _LessonsState extends State<Lessons> {
                             Row(
                               children: <Widget>[
                                 Container(
-                                  height: ScreenAdaper.height(36),
+                                  height: ScreenAdapter.height(36),
                                   margin: EdgeInsets.only(right: 10),
                                   padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                                   decoration: BoxDecoration(
@@ -129,7 +170,7 @@ class _LessonsState extends State<Lessons> {
                                   child: Text("4g"),
                                 ),
                                 Container(
-                                  height: ScreenAdaper.height(36),
+                                  height: ScreenAdapter.height(36),
                                   margin: EdgeInsets.only(right: 10),
                                   padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                                   decoration: BoxDecoration(
@@ -167,11 +208,11 @@ class _LessonsState extends State<Lessons> {
   Widget _subHeaderWidget() {
     return Positioned(
       top: 0,
-      height: ScreenAdaper.height(80),
-      width: ScreenAdaper.width(750),
+      height: ScreenAdapter.height(80),
+      width: ScreenAdapter.width(750),
       child: Container(
-        width: ScreenAdaper.width(750),
-        height: ScreenAdaper.height(80),
+        width: ScreenAdapter.width(750),
+        height: ScreenAdapter.height(80),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -188,9 +229,9 @@ class _LessonsState extends State<Lessons> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(
                     0,
-                    ScreenAdaper.height(16),
+                    ScreenAdapter.height(16),
                     0,
-                    ScreenAdaper.height(16),
+                    ScreenAdapter.height(16),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -224,8 +265,14 @@ class _LessonsState extends State<Lessons> {
     });
 
     print(widget.arguments);
-    var api =
-        '${Config.domain}api/plist?cid=${widget.arguments["pid"]}&page=$_page&sort=$_sort&pageSize=$_pageSize';
+    var api;
+    if (this._keywords == null) {
+      api =
+          '${Config.domain}api/plist?cid=${this._pid}&page=${this._page}&sort=${this._sort}&pageSize=${this._pageSize}';
+    } else {
+      api =
+          '${Config.domain}api/plist?search=${this._keywords}&page=${this._page}&sort=${this._sort}&pageSize=${this._pageSize}';
+    }
     print(api);
 
     var result = await Dio().get(api);

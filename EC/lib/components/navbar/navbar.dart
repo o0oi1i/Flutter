@@ -44,23 +44,28 @@ class SearchField extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              textAlignVertical: TextAlignVertical.top,
-              cursorColor: ECTheme.darkTextTheme.headline1.color,
-              decoration: InputDecoration(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                  size: 22.0,
+            child: InkWell(
+              child: TextField(
+                textAlignVertical: TextAlignVertical.top,
+                cursorColor: ECTheme.darkTextTheme.headline1.color,
+                decoration: InputDecoration(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                    size: 22.0,
+                  ),
+                  border: InputBorder.none,
+                  hintText: "Search for courses",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
-                border: InputBorder.none,
-                hintText: "Search for courses",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+                style: TextStyle(color: Colors.black, fontSize: 16),
+                onChanged: (newText) {
+                  print(newText);
+                },
+                onTap: () {
+                  Navigator.pushNamed(context, '/search');
+                },
               ),
-              style: TextStyle(color: Colors.black, fontSize: 16),
-              onChanged: (newText) {
-                print(newText);
-              },
             ),
           ),
         ),
